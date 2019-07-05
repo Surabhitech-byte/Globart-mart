@@ -42,7 +42,7 @@ public class MenuActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.my_cart_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new MyCart());
+                        fragmentTransaction.replace(R.id.main_container, new MyCartFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("My Cart");
                         menuItem.setChecked(true);
@@ -50,7 +50,7 @@ public class MenuActivity extends AppCompatActivity {
                         break;
                     case R.id.my_orders_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new MyOrders());
+                        fragmentTransaction.replace(R.id.main_container, new MyOrdersFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("My Orders");
                         menuItem.setChecked(true);
@@ -58,7 +58,7 @@ public class MenuActivity extends AppCompatActivity {
                         break;
                     case R.id.need_help_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new NeedHelp());
+                        fragmentTransaction.replace(R.id.main_container, new NeedHelpFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Help & Support");
                         menuItem.setChecked(true);
@@ -66,7 +66,7 @@ public class MenuActivity extends AppCompatActivity {
                         break;
                     case R.id.feedback_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new feedback());
+                        fragmentTransaction.replace(R.id.main_container, new FeedbackFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Recommendations");
                         menuItem.setChecked(true);
@@ -89,7 +89,7 @@ public class MenuActivity extends AppCompatActivity {
                 {
                     case R.id.home:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new home());
+                        fragmentTransaction.replace(R.id.main_container, new HomeFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Home");
                         menuItem.setChecked(true);
@@ -105,7 +105,7 @@ public class MenuActivity extends AppCompatActivity {
                         break;
                     case R.id.store_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new BrowseByStores());
+                        fragmentTransaction.replace(R.id.main_container, new BrowseByStoresFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Stores");
                         menuItem.setChecked(true);
@@ -113,7 +113,7 @@ public class MenuActivity extends AppCompatActivity {
                         break;
                     case R.id.categories:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new ShopByCategory());
+                        fragmentTransaction.replace(R.id.main_container, new ShopByCategoryHomeFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Categories");
                         menuItem.setChecked(true);

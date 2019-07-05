@@ -20,7 +20,7 @@ import android.widget.TextView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NeedHelp extends Fragment {
+public class NeedHelpFragment extends Fragment {
 
     private Context mContext;
     private Activity mActivity;
@@ -43,7 +43,7 @@ public class NeedHelp extends Fragment {
 
     private String phone;
 
-    public NeedHelp() {
+    public NeedHelpFragment() {
         // Required empty public constructor
     }
 
