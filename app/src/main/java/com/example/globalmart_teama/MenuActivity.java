@@ -13,7 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 
-public class MenuActivity extends AppCompatActivity {
+public class    MenuActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle togglelayout;

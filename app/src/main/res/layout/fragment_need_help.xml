@@ -31,7 +31,10 @@
                 android:id="@+id/Indian_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#00070606"
                 android:text="Indian Grocery stores:\n"
+                android:textAlignment="center"
+                android:textColor="#E90C0B0B"
                 android:textSize="18sp" />
             <TextView
                 android:id="@+id/textview1"
@@ -45,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7828821002\n"
+                android:textColor="#1E88E5"
                 android:textSize="14sp" />
 
             <TextView
@@ -53,11 +57,13 @@
                 android:layout_height="wrap_content"
                 android:text="Brothers Indian Grocery Store(BIGS)\nAddress: Address: 5314 Morris Street, South End\nHalifax, NS, Canada\nContact:"
                 android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/contactview2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7828821002\n"
+                android:textColor="#1E88E5"
                 android:textSize="14sp" />
 
             <TextView
@@ -66,11 +72,13 @@
                 android:layout_height="wrap_content"
                 android:text="House of Halal\nAddress: Address: 14 Titus Street, Fairview\nHalifax, NS, Canada\nContact:"
                 android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/contactview3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7828821002\n"
+                android:textColor="#1E88E5"
                 android:textSize="14sp" />
 
             <TextView
@@ -79,11 +87,13 @@
                 android:layout_height="wrap_content"
                 android:text="Dhaba Sweets and spice\nAddress: 8 Oland Crescent, Bayers Lake\nHalifax, NS, Canada\nContact:"
                 android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/contactview4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7828821002\n"
+                android:textColor="#1E88E5"
                 android:textSize="14sp" />
 
             <TextView
@@ -92,11 +102,13 @@
                 android:layout_height="wrap_content"
                 android:text="Ca Hoa Grocery\nAddress: 5483 Victoria Road, South End\nHalifax, NS, Canada\nContact:"
                 android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/contactview5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7828821002\n"
+                android:textColor="#1E88E5"
                 android:textSize="14sp" />
 
 
@@ -105,6 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Italian Grocery stores:\n"
+                android:textColor="#E90E0D0D"
                 android:textSize="18sp" />
             <TextView
                 android:id="@+id/italian1"
@@ -112,11 +125,13 @@
                 android:layout_height="wrap_content"
                 android:text="IItalian Market\nAddress: 6061 young street, North End\nHalifax, NS, Canada\nContact:"
                 android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/italian_contactview1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7828821002\n"
+                android:textColor="#1E88E5"
                 android:textSize="14sp" />
 
             <TextView
@@ -125,11 +140,13 @@
                 android:layout_height="wrap_content"
                 android:text="The European Pantry\nAddress: 6516 Chebucto Rd, West End\nHalifax, NS, Canada\nContact:"
                 android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/italian_contactview2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7828821002\n"
+                android:textColorLink="#1E88E5"
                 android:textSize="14sp" />
 
             <TextView
@@ -143,6 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7828821002\n"
+                android:textColor="#1E88E5"
                 android:textSize="14sp" />
 
             <TextView
@@ -150,6 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Chinese Grocery stores:\n"
+                android:textColor="#E90C0B0B"
                 android:textSize="18sp" />
             <TextView
                 android:id="@+id/chinese1"
@@ -162,6 +181,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7828821002\n"
+                android:textColor="#1E88E5"
                 android:textSize="14sp" />
 
             <TextView
@@ -175,6 +195,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7828821002\n"
+                android:textColor="#1E88E5"
                 android:textSize="14sp" />
 
             <TextView
@@ -188,6 +209,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7828821002\n"
+                android:textColor="#1E88E5"
                 android:textSize="14sp" />
 
 
@@ -196,6 +218,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Japanese Grocery stores:\n"
+                android:textColor="#E90C0B0B"
                 android:textSize="18sp" />
             <TextView
                 android:id="@+id/Japanese1"
@@ -208,6 +231,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7828821002\n"
+                android:textColor="#1E88E5"
                 android:textSize="14sp" />
 
             <TextView
@@ -221,6 +245,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7828821002\n"
+                android:textColor="#1E88E5"
                 android:textSize="14sp" />
 
             <TextView
@@ -234,6 +259,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7828821002\n"
+                android:textColor="#1E88E5"
                 android:textSize="14sp" />
 
             <TextView
@@ -247,6 +273,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7828821002\n"
+                android:textColor="#1E88E5"
                 android:textSize="14sp" />
         </LinearLayout>
 
