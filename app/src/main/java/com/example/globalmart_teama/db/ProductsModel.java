@@ -81,20 +81,18 @@ public class ProductsModel {
         this.productCategoryName = productCategoryName;
     }
 
-<<<<<<< app/src/main/java/com/example/globalmart_teama/db/ProductsModel.java
     public String getProductCode() {
         return productCode;
     }
 
     public void setProductCode(String productCode) {
         this.productCode = productCode;
-=======
+    }
     public int getProductCartQuantity() {
         return productCartQuantity;
     }
 
     public void setProductCartQuantity(int productCartQuantity) {
         this.productCartQuantity = productCartQuantity;
->>>>>>> app/src/main/java/com/example/globalmart_teama/db/ProductsModel.java
     }
 }

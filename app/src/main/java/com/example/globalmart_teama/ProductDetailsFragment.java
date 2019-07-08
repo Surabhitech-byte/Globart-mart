@@ -40,7 +40,6 @@ public class ProductDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_product_details, container, false);
 
@@ -74,7 +73,7 @@ public class ProductDetailsFragment extends Fragment {
                 btnAddToCart.setVisibility(View.INVISIBLE);
                 txtAddedtoCart.setVisibility(View.VISIBLE);
 
-                ProductsModel product= new ProductsModel(productID, name, desc, price, imgId, null,null);
+                ProductsModel product= new ProductsModel(productID, name, desc, price, imgId, null,null, null);
 
                 try {
                     SharedPreferences shref = getActivity().getSharedPreferences("CARTLIST", Context.MODE_PRIVATE);
