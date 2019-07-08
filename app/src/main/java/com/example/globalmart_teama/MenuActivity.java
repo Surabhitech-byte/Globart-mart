@@ -1,19 +1,30 @@
 package com.example.globalmart_teama;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.example.globalmart_teama.db.Database;
+import com.example.globalmart_teama.db.ProductsModel;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
-public class MenuActivity extends AppCompatActivity {
+import java.util.List;
+
+
+public class    MenuActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle togglelayout;
@@ -138,5 +149,65 @@ public class MenuActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        Log.d("hello","world");
+        super.onActivityResult(requestCode, resultCode, intent);
+        //retrieve scan result
+        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        Log.d("abc1", "hello");
+        if (scanningResult != null) {
+            //we have a result
+
+            String scanContent = scanningResult.getContents();
+            String scanFormat = scanningResult.getFormatName();
+
+            Log.d("abc", scanContent);
+
+            final Database database = new Database(this);
+            List<ProductsModel> df = null;
+            df = database.getProductsModels();
+
+            ProductsModel currBeverage = null;
+
+            for (ProductsModel name : df) {
+                if ((name.getProductCode().toLowerCase()).equals(scanContent)) {
+                    currBeverage = name;
+
+                }
+            }
+
+            int productId = currBeverage.getProductID();
+            String productName = currBeverage.getProductName();
+            String productDesc = currBeverage.getProductDesc();
+            int productPrice = currBeverage.getProductPrice();
+            String productImageId = currBeverage.getProductImageID();
+            String productCategoryName = currBeverage.getProductCategoryName();
+            String productCountryName = currBeverage.getProductCountryName();
+
+            Bundle detailsBundle = new Bundle();
+            detailsBundle.putString("productName", productName);
+            detailsBundle.putString("beverageDesc", productDesc);
+            detailsBundle.putInt("beveragePrice", productPrice);
+            detailsBundle.putString("beverageImageId", productImageId);
+            detailsBundle.putString("beverageCategory", productCategoryName);
+            detailsBundle.putString("beverageCountryId", productCountryName);
+
+            ProductDetailsFragment fragment = new ProductDetailsFragment();
+            fragment.setArguments(detailsBundle);
+
+            FragmentTransaction ft =  fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.main_container, fragment, "PRODUCT DESCRIPTION");
+            ft.addToBackStack(null);
+            ft.commit();
+
+        } else {
+//            Toast toast = Toast.makeText(getContext(),
+//                    "No scan data received!", Toast.LENGTH_SHORT);
+//            toast.show();
+        }
+
     }
 }
