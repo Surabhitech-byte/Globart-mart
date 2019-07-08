@@ -52,25 +52,23 @@ public class NeedHelpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        super.onCreate(savedInstanceState);
-        getActivity().setContentView(R.layout.fragment_need_help);
-
+      View v=inflater.inflate(R.layout.fragment_need_help, container, false);
         // Get the widget reference from xml layout
-        contact1=getActivity().findViewById(R.id.contactview1);
-        contact2=getActivity().findViewById(R.id.contactview2);
-        contact3=getActivity().findViewById(R.id.contactview3);
-        contact4=getActivity().findViewById(R.id.contactview4);
-        contact5=getActivity().findViewById(R.id.contactview5);
-        italian_contact1=getActivity().findViewById(R.id.italian_contactview1);
-        italian_contact2=getActivity().findViewById(R.id.italian_contactview2);
-        italian_contact3=getActivity().findViewById(R.id.italian_contactview3);
-        chinese_contact1=getActivity().findViewById(R.id.chinese_contactview1);
-        chinese_contact2=getActivity().findViewById(R.id.chinese_contactview2);
-        chinese_contact3=getActivity().findViewById(R.id.chinese_contactview3);
-        japanese_contact1=getActivity().findViewById(R.id.Japanese_contactview1);
-        japanese_contact2=getActivity().findViewById(R.id.Japanese_contactview2);
-        japanese_contact3=getActivity().findViewById(R.id.Japanese_contactview3);
-        japanese_contact4=getActivity().findViewById(R.id.Japanese_contactview4);
+        contact1=v.findViewById(R.id.contactview1);
+        contact2=v.findViewById(R.id.contactview2);
+        contact3=v.findViewById(R.id.contactview3);
+        contact4=v.findViewById(R.id.contactview4);
+        contact5=v.findViewById(R.id.contactview5);
+        italian_contact1=v.findViewById(R.id.italian_contactview1);
+        italian_contact2=v.findViewById(R.id.italian_contactview2);
+        italian_contact3=v.findViewById(R.id.italian_contactview3);
+        chinese_contact1=v.findViewById(R.id.chinese_contactview1);
+        chinese_contact2=v.findViewById(R.id.chinese_contactview2);
+        chinese_contact3=v.findViewById(R.id.chinese_contactview3);
+        japanese_contact1=v.findViewById(R.id.Japanese_contactview1);
+        japanese_contact2=v.findViewById(R.id.Japanese_contactview2);
+        japanese_contact3=v.findViewById(R.id.Japanese_contactview3);
+        japanese_contact4=v.findViewById(R.id.Japanese_contactview4);
 
         // Inflate the layout for this fragment
         // Set a click listener for the button
@@ -182,7 +180,7 @@ public class NeedHelpFragment extends Fragment {
                 openDialer();
             }
         });
-          return inflater.inflate(R.layout.fragment_need_help, container, false);
+          return v;
 
     }
     protected void openDialer(){  Intent intent = new Intent(Intent.ACTION_DIAL);
