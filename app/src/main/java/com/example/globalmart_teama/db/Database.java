@@ -2,6 +2,7 @@ package com.example.globalmart_teama.db;
 
 import android.content.Context;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,7 @@ public class Database {
     private static final Map<Integer, String> PRODUCT_IMAGE_IDS = new HashMap<>();
     private static final Map<Integer, String> PRODUCT_CATEGORY_NAMES = new HashMap<>();
     private static final Map<Integer, String> PRODUCT_COUNTRY_NAMES = new HashMap<>();
+    private static final Map<Integer, String> PRODUCT_CODES = new HashMap<>();
 
     static {
         PRODUCT_NAMES.put(1, "Mango Lassi");
@@ -97,17 +99,31 @@ public class Database {
 
     }
 
+    static {
+        PRODUCT_CODES.put(1, "9780123456786");
+        PRODUCT_CODES.put(2, "123");
+        PRODUCT_CODES.put(3, "152");
+        PRODUCT_CODES.put(4, "153");
+        PRODUCT_CODES.put(5, "25");
+        PRODUCT_CODES.put(6, "35");
+        PRODUCT_CODES.put(7, "xxx");
+        PRODUCT_CODES.put(8, "1243");
+        PRODUCT_CODES.put(9, "434");
+        PRODUCT_CODES.put(10, "4325");
+    }
+
     public Database(Context context) {
         dataQueries = new DataQueries(context);
         dataQueries.open();
 
         if (dataQueries.isAppRunningFirstTime()) {
-            for (int key : PRODUCT_NAMES.keySet())
-            {  //NAME and AGE use the same keyset.
+            for (int key : PRODUCT_NAMES.keySet()) {  //NAME and AGE use the same keyset.
 
                 dataQueries.createProduct(
                         new ProductsModel(key, PRODUCT_NAMES.get(key), PRODUCT_DESC.get(key),
-                        PRODUCT_PRICES.get(key), PRODUCT_IMAGE_IDS.get(key), PRODUCT_COUNTRY_NAMES.get(key), PRODUCT_CATEGORY_NAMES.get(key)));
+                                PRODUCT_PRICES.get(key), PRODUCT_IMAGE_IDS.get(key),
+                                PRODUCT_COUNTRY_NAMES.get(key), PRODUCT_CATEGORY_NAMES.get(key),
+                                PRODUCT_CODES.get(key)));
             }
 
         }

@@ -24,10 +24,12 @@ public class DataQueries {
             DBHelper.ProductsEntry.COLUMN_PRODUCT_PRICE,
             DBHelper.ProductsEntry.COLUMN_PRODUCT_IMAGE_ID,
             DBHelper.ProductsEntry.COLUMN_COUNTRY_NAME,
-            DBHelper.ProductsEntry.COLUMN_CATEGORY_NAME,};
+            DBHelper.ProductsEntry.COLUMN_CATEGORY_NAME,
+            DBHelper.ProductsEntry.COLUMN_PRODUCT_CODE
+    };
 
 
-    public DataQueries(Context context){
+    public DataQueries(Context context) {
         mContext = context;
         dbHelper = new DBHelper(context);
     }
@@ -36,7 +38,7 @@ public class DataQueries {
         database = dbHelper.getWritableDatabase();
     }
 
-    public void close(){
+    public void close() {
         dbHelper.close();
     }
 
@@ -49,6 +51,7 @@ public class DataQueries {
         values.put(DBHelper.ProductsEntry.COLUMN_PRODUCT_IMAGE_ID, productsModel.getProductImageID());
         values.put(DBHelper.ProductsEntry.COLUMN_CATEGORY_NAME, productsModel.getProductCategoryName());
         values.put(DBHelper.ProductsEntry.COLUMN_COUNTRY_NAME, productsModel.getProductCountryName());
+        values.put(DBHelper.ProductsEntry.COLUMN_PRODUCT_CODE, productsModel.getProductCode());
 
         long insertId = database.insert(DBHelper.ProductsEntry.TABLE_NAME, null, values);
 
@@ -68,7 +71,7 @@ public class DataQueries {
         Cursor cursor = database.query(DBHelper.ProductsEntry.TABLE_NAME,
                 productColumns, null, null, null, null, null);
         cursor.moveToFirst();
-        while(!cursor.isAfterLast()){
+        while (!cursor.isAfterLast()) {
             ProductsModel productModel = getProductDataFromCursor(cursor);
             productModelList.add(productModel);
             cursor.moveToNext();
@@ -78,17 +81,18 @@ public class DataQueries {
         return productModelList;
     }
 
-    private ProductsModel getProductDataFromCursor(Cursor cursor){
+    private ProductsModel getProductDataFromCursor(Cursor cursor) {
         return new ProductsModel(cursor.getInt(0), cursor.getString(1),
                 cursor.getString(2), cursor.getInt(3),
-                cursor.getString(4), cursor.getString(5), cursor.getString(6));
+                cursor.getString(4), cursor.getString(5), cursor.getString(6),
+                cursor.getString(7));
     }
 
     public boolean isAppRunningFirstTime() {
         boolean isFirst = mContext.getSharedPreferences(SHARED_PREF_BEVERAGE, Context.MODE_PRIVATE)
                 .getBoolean(IS_FIRST_TIME, true);
 
-        if(isFirst){
+        if (isFirst) {
             mContext.getSharedPreferences(SHARED_PREF_BEVERAGE, Context.MODE_PRIVATE).edit()
                     .putBoolean(IS_FIRST_TIME, false).apply();
         }
