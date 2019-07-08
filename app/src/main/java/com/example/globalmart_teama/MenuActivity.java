@@ -72,6 +72,15 @@ public class MenuActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         break;
+
+                    case R.id.purchase_history_id:
+                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.main_container, new PurchaseHistory());
+                        fragmentTransaction.commit();
+                        getSupportActionBar().setTitle("Purchase History");
+                        menuItem.setChecked(true);
+                        drawerLayout.closeDrawers();
+                        break;
                     default:
                         Toast.makeText(getApplicationContext(),"default case",Toast.LENGTH_SHORT);
 

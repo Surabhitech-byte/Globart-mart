@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class Database {
     private List<ProductsModel> productsModelList = new ArrayList<>();
+    private List<OrderModel> ordersModelList;
     private final DataQueries dataQueries;
 
     private static final Map<Integer, String> PRODUCT_NAMES = new HashMap<>();
@@ -17,6 +18,11 @@ public class Database {
     private static final Map<Integer, String> PRODUCT_IMAGE_IDS = new HashMap<>();
     private static final Map<Integer, String> PRODUCT_CATEGORY_NAMES = new HashMap<>();
     private static final Map<Integer, String> PRODUCT_COUNTRY_NAMES = new HashMap<>();
+    private static final Map<Integer, Integer> ORDER_ID = new HashMap<>();
+    private static final Map<Integer, Integer> CUSTOMER_ID = new HashMap<>();
+    private static final Map<Integer, Integer> PRODUCT_ID = new HashMap<>();
+    private static final Map<Integer, Integer> QUANTITY = new HashMap<>();
+
 
     static {
         PRODUCT_NAMES.put(1, "Mango Lassi");
@@ -97,26 +103,80 @@ public class Database {
 
     }
 
+    static {
+        ORDER_ID.put(1, 101);
+        ORDER_ID.put(2, 102);
+        ORDER_ID.put(3, 103);
+        ORDER_ID.put(4, 104);
+        ORDER_ID.put(5, 105);
+    }
+
+    static {
+        CUSTOMER_ID.put(1, 255);
+        CUSTOMER_ID.put(2, 256);
+        CUSTOMER_ID.put(3, 257);
+        CUSTOMER_ID.put(4, 258);
+        CUSTOMER_ID.put(5, 259);
+    }
+
+    static {
+
+        PRODUCT_ID.put(1, 301);
+        PRODUCT_ID.put(2, 302);
+        PRODUCT_ID.put(3, 303);
+        PRODUCT_ID.put(5, 305);
+        PRODUCT_ID.put(4, 304);
+
+    }
+
+    static {
+        QUANTITY.put(1, 3);
+        QUANTITY.put(2, 4);
+        QUANTITY.put(3, 1);
+        QUANTITY.put(4, 2);
+        QUANTITY.put(5, 1);
+
+    }
+
+
     public Database(Context context) {
         dataQueries = new DataQueries(context);
         dataQueries.open();
 
         if (dataQueries.isAppRunningFirstTime()) {
-            for (int key : PRODUCT_NAMES.keySet())
-            {  //NAME and AGE use the same keyset.
+            for (int key : PRODUCT_NAMES.keySet()) {
 
                 dataQueries.createProduct(
                         new ProductsModel(key, PRODUCT_NAMES.get(key), PRODUCT_DESC.get(key),
-                        PRODUCT_PRICES.get(key), PRODUCT_IMAGE_IDS.get(key), PRODUCT_COUNTRY_NAMES.get(key), PRODUCT_CATEGORY_NAMES.get(key)));
+                                PRODUCT_PRICES.get(key), PRODUCT_IMAGE_IDS.get(key), PRODUCT_COUNTRY_NAMES.get(key), PRODUCT_CATEGORY_NAMES.get(key)));
+
+
             }
+            for (int key1 : ORDER_ID.keySet()) {
+
+                dataQueries.createOrder(
+                        new OrderModel(ORDER_ID.get(key1), PRODUCT_ID.get(key1), QUANTITY.get(key1),
+                                CUSTOMER_ID.get(key1)));
+
+                System.out.println("Order : "+key1+"Product : "+PRODUCT_ID.get(key1)+"Quantity : "+QUANTITY.get(key1)+"Customer : "+CUSTOMER_ID.get(key1));
+
+
+            }
+
 
         }
 
         productsModelList = dataQueries.getAllProducts();
+        ordersModelList = dataQueries.getAllOrders();
     }
+
 
     public List<ProductsModel> getProductsModels() {
         return productsModelList;
+    }
+
+    public List<OrderModel> getOrdersModels() {
+        return ordersModelList;
     }
 
     public void closeDatabase() {
@@ -132,5 +192,16 @@ public class Database {
 
         return null;
     }
+
+    public OrderModel getOrderModelByID(int orderID) {
+        for (OrderModel curr : ordersModelList) {
+            if (curr.getOrderID() == orderID) {
+                return curr;
+            }
+        }
+
+        return null;
+    }
+
 }
 

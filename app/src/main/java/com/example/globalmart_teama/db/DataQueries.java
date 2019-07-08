@@ -26,6 +26,12 @@ public class DataQueries {
             DBHelper.ProductsEntry.COLUMN_COUNTRY_NAME,
             DBHelper.ProductsEntry.COLUMN_CATEGORY_NAME,};
 
+    private String[] orderColumns = {
+            DBHelper.OrdersEntry.COLUMN_ORDER_ID,
+            DBHelper.OrdersEntry.COLUMN_PRODUCT_ID,
+            DBHelper.OrdersEntry.COLUMN_QUANTITY_,
+            DBHelper.OrdersEntry.COLUMN_CUSTOMER_ID};
+
 
     public DataQueries(Context context){
         mContext = context;
@@ -62,6 +68,25 @@ public class DataQueries {
         return productDataFromCursor;
     }
 
+    public OrderModel createOrder(OrderModel orderModel) {
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.OrdersEntry.COLUMN_ORDER_ID, orderModel.getOrderID());
+        values.put(DBHelper.OrdersEntry.COLUMN_PRODUCT_ID, orderModel.getProductID());
+        values.put(DBHelper.OrdersEntry.COLUMN_QUANTITY_, orderModel.getQuantity());
+        values.put(DBHelper.OrdersEntry.COLUMN_CUSTOMER_ID, orderModel.getCustomerID());
+
+        long insertId = database.insert(DBHelper.OrdersEntry.TABLE_NAME, null, values);
+
+        Cursor cursor = database.query(DBHelper.OrdersEntry.TABLE_NAME,
+                orderColumns, DBHelper.OrdersEntry.COLUMN_ORDER_ID + " = " + insertId,
+                null, null, null, null);
+        ((Cursor) cursor).moveToFirst();
+        OrderModel orderDataFromCursor = getOrderDataFromCursor(cursor);
+        cursor.close();
+
+        return orderDataFromCursor;
+    }
+
     public List<ProductsModel> getAllProducts() {
         List<ProductsModel> productModelList = new ArrayList<ProductsModel>();
 
@@ -78,10 +103,33 @@ public class DataQueries {
         return productModelList;
     }
 
+
+    public List<OrderModel> getAllOrders() {
+        List<OrderModel> OrderModelList = new ArrayList<OrderModel>();
+
+        Cursor cursor = database.query(DBHelper.OrdersEntry.TABLE_NAME,
+                orderColumns, null, null, null, null, null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            OrderModel orderModel = getOrderDataFromCursor(cursor);
+            OrderModelList.add(orderModel);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return OrderModelList;
+    }
+
+
     private ProductsModel getProductDataFromCursor(Cursor cursor){
         return new ProductsModel(cursor.getInt(0), cursor.getString(1),
                 cursor.getString(2), cursor.getInt(3),
                 cursor.getString(4), cursor.getString(5), cursor.getString(6));
+    }
+
+    private OrderModel getOrderDataFromCursor(Cursor cursor){
+        return new OrderModel(cursor.getInt(0), cursor.getInt(1),
+                cursor.getInt(2), cursor.getInt(3));
     }
 
     public boolean isAppRunningFirstTime() {
