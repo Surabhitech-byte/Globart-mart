@@ -51,8 +51,8 @@ public class NeedHelpFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_need_help, container, false);
 
+      View v=inflater.inflate(R.layout.fragment_need_help, container, false);
         // Get the widget reference from xml layout
         contact1=v.findViewById(R.id.contactview1);
         contact2=v.findViewById(R.id.contactview2);

@@ -62,7 +62,6 @@ public class GridItem extends BaseAdapter {
         textView.setText(mBeverageModelList.get(position).productName);
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.imgProduct);
-//        imageView.setImageResource(R.drawable.ic_launcher_background);
         String imageID = mBeverageModelList.get(position).productImageID;
         int id = mActivity.getResources().getIdentifier(imageID, "drawable", mActivity.getPackageName());
         imageView.setImageResource(id);

@@ -113,7 +113,7 @@
         app:layout_constraintVertical_bias="0.892" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/btnAddtoCart"
         android:layout_width="189dp"
         android:layout_height="74dp"
         android:layout_marginStart="8dp"
@@ -128,4 +128,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.553"
         app:srcCompat="@drawable/cart" />
+
+    <TextView
+        android:id="@+id/cart_added_txt"
+        android:layout_width="200dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Added to Cart!"
+        android:textAlignment="center"
+        android:textColor="#219129"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.994"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.563" />
 </android.support.constraint.ConstraintLayout>

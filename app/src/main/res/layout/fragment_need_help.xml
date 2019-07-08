@@ -7,22 +7,13 @@
 
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="399dp"
+        android:layout_height="657dp">
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/root_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:orientation="vertical">
-
-
-        <LinearLayout
-            android:id="@+id/linear_layout"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/root_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -277,7 +268,135 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/italian3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="East side Marios\nAddress: 186 Chain Lake Dr, Bayers Lake\nHalifax, NS, Canada\nContact:"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/italian_contactview3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7828821002\n"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/chinese_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chinese Grocery stores:\n"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/chinese1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Taishan Asian Grocery\nAddress: 6466 Quinpool Rd, West End\nHalifax, NS, Canada\nContact:"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/chinese_contactview1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7828821002\n"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/chinese2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tian Phat Asian Grocery\nAddress: 209 Bedford Highway, Clayton park\nHalifax, NS, Canada\nContact:"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/chinese_contactview2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7828821002\n"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/chinese3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Don 88 Asian Grocery\nAddress: 6083 South street\nHalifax, NS, Canada\nContact:"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/chinese_contactview3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7828821002\n"
+                    android:textSize="14sp" />
+
+
+                <TextView
+                    android:id="@+id/Japanese_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Japanese Grocery stores:\n"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/Japanese1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Heiwa Oriental Market\nAddress: 7018 Chebucto Rd, West End\nHalifax, NS, Canada\nContact:"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/Japanese_contactview1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7828821002\n"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/Japanese2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Don 88 Asian Grocery\nAddress: 6083 South street \nHalifax, NS, Canada\nContact:"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/Japanese_contactview2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7828821002\n"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/Japanese3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ca Hoa Grocery\nAddress: 5483 Victoria Road, South End\nHalifax, NS, Canada\nContact:"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/Japanese_contactview3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7828821002\n"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/Japanese4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bulk Barn\nAddress: 3440 Joseph Howe Drive, fairview\nHalifax, NS, Canada\nContact:"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/Japanese_contactview4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7828821002\n"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
 
     </ScrollView>
 </FrameLayout>

@@ -10,6 +10,7 @@ public class ProductsModel {
     public String productCountryName;
     public String productCategoryName;
     public String productCode;
+    public int productCartQuantity = 0;
 
     public ProductsModel(int id, String productName, String productDesc, int productPrice,
                          String productImageID, String productCountryName, String  productCategoryName,
@@ -80,11 +81,20 @@ public class ProductsModel {
         this.productCategoryName = productCategoryName;
     }
 
+<<<<<<< app/src/main/java/com/example/globalmart_teama/db/ProductsModel.java
     public String getProductCode() {
         return productCode;
     }
 
     public void setProductCode(String productCode) {
         this.productCode = productCode;
+=======
+    public int getProductCartQuantity() {
+        return productCartQuantity;
+    }
+
+    public void setProductCartQuantity(int productCartQuantity) {
+        this.productCartQuantity = productCartQuantity;
+>>>>>>> app/src/main/java/com/example/globalmart_teama/db/ProductsModel.java
     }
 }
