@@ -17,7 +17,6 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String INTEGER_TYPE = " INTEGER";
     private static final String COMMA_SEP = ",";
 
-
     public static abstract class ProductsEntry implements BaseColumns {
         public static final String TABLE_NAME = "products";
         public static final String COLUMN_PRODUCT_ID = "product_id";
@@ -29,6 +28,17 @@ public class DBHelper extends SQLiteOpenHelper {
         public static final String COLUMN_CATEGORY_NAME = "product_category_name";
         public static final String COLUMN_PRODUCT_CODE = "product_code";
     }
+
+
+    public static abstract class OrdersEntry implements BaseColumns {
+        public static final String TABLE_NAME = "orders";
+        public static final String COLUMN_ORDER_ID = "order_id";
+        public static final String COLUMN_PRODUCT_ID = "product_id";
+        public static final String COLUMN_QUANTITY_ = "product_quantity";
+        public static final String COLUMN_CUSTOMER_ID = "customer_id";
+
+    }
+
 
     private static final String SQL_CREATE_PRODUCT_TABLE =
             "CREATE TABLE IF NOT EXISTS " + ProductsEntry.TABLE_NAME + " (" +
@@ -42,8 +52,23 @@ public class DBHelper extends SQLiteOpenHelper {
                     ProductsEntry.COLUMN_PRODUCT_CODE + TEXT_TYPE +" )";
 
 
+    private static final String SQL_CREATE_ORDER_TABLE =
+            "CREATE TABLE IF NOT EXISTS " + OrdersEntry.TABLE_NAME + " (" +
+                    OrdersEntry.COLUMN_ORDER_ID + " INTEGER PRIMARY KEY" + COMMA_SEP +
+                    OrdersEntry.COLUMN_PRODUCT_ID + INTEGER_TYPE + COMMA_SEP +
+                    OrdersEntry.COLUMN_QUANTITY_+ INTEGER_TYPE + COMMA_SEP +
+                    OrdersEntry.COLUMN_CUSTOMER_ID + INTEGER_TYPE +" )";
+
+
+    private static final String SQL_DELETE_SELECTED_ORDER =
+            "DROP TABLE IF EXISTS " + ProductsEntry.TABLE_NAME;
+
+
     private static final String SQL_DELETE_PRODUCT =
             "DROP TABLE IF EXISTS " + ProductsEntry.TABLE_NAME;
+
+    private static final String SQL_DELETE_ORDER =
+            "DROP TABLE IF EXISTS " + OrdersEntry.TABLE_NAME;
 
 
     public DBHelper(Context context) {
@@ -53,15 +78,31 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         db.execSQL(SQL_CREATE_PRODUCT_TABLE);
+        db.execSQL(SQL_CREATE_ORDER_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DELETE_PRODUCT);
+        db.execSQL(SQL_DELETE_ORDER);
     }
 
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion){
         onUpgrade(db, oldVersion, newVersion);
     }
+
+    public void deleteOrder(int orderId)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(DBHelper.OrdersEntry.TABLE_NAME, DBHelper.OrdersEntry.COLUMN_ORDER_ID + "=?", new String[]{Integer.toString(orderId)});
+
+
+
+    }
+
+
+
+
 }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/linear_layout"
+    xmlns:grid="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp"
+    android:layout_weight="1">
+
+
+
+
+    <TextView
+        android:id="@+id/order_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingLeft="22dp"
+        android:text="Order Id :"
+        android:scaleType="fitCenter">
+    </TextView>
+
+
+    <TextView
+        android:id="@+id/txt_order_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingLeft="22dp"
+        android:scaleType="fitCenter">
+    </TextView>
+
+
+    <TextView
+        android:id="@+id/product_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingLeft="22dp"
+        android:text="Product Id :"
+        android:scaleType="fitCenter">
+    </TextView>
+    <TextView
+        android:id="@+id/txt_product_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingLeft="22dp"
+        android:scaleType="fitCenter">
+    </TextView>
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingLeft="22dp"
+        android:text="Quantity"
+        android:scaleType="fitCenter">
+    </TextView>
+    <TextView
+        android:id="@+id/txt_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingLeft="22dp"
+        android:scaleType="fitCenter">
+    </TextView>
+
+    <Button
+        android:id="@+id/btn_cancelOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:paddingLeft="22dp"
+        android:scaleType="fitCenter"
+        android:text="Cancel"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="visible"></Button>
+
+    <TextView
+        android:id="@+id/txtOrderCancelConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your order has been cancelled successfully"
+        android:visibility="invisible"/>
+
+
+</LinearLayout>

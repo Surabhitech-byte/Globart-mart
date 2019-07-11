@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,12 +33,16 @@ public class BeveragesCategoryFragment extends Fragment {
 
         beveragesList.setAdapter(new GridItem(getActivity(), database.getProductsModels()));
 
+        System.out.println("Back to fragmnet");
+
+
         beveragesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adaptor, View v, int listIndex, long arg3) {
 
                 Bundle detailsBundle = new Bundle();
-
+               /* System.out.println("Inside on item click");*/
+               // Log.println(1, "onClick","Inside on item click listener");
                 ProductsModel currBeverage = database.getProductsModels().get(listIndex);
                 int productId = currBeverage.getProductID();
                 String productName = currBeverage.getProductName();
