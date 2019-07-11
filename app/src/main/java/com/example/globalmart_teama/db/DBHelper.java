@@ -15,7 +15,6 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String INTEGER_TYPE = " INTEGER";
     private static final String COMMA_SEP = ",";
 
-
     public static abstract class ProductsEntry implements BaseColumns {
         public static final String TABLE_NAME = "products";
         public static final String COLUMN_PRODUCT_ID = "product_id";
@@ -89,4 +88,17 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion){
         onUpgrade(db, oldVersion, newVersion);
     }
+
+    public void deleteOrder(int orderId)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(DBHelper.OrdersEntry.TABLE_NAME, DBHelper.OrdersEntry.COLUMN_ORDER_ID + "=?", new String[]{Integer.toString(orderId)});
+
+
+
+    }
+
+
+
+
 }

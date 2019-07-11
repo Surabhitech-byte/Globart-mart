@@ -68,6 +68,10 @@ public class DataQueries {
         return productDataFromCursor;
     }
 
+
+
+
+
     public OrderModel createOrder(OrderModel orderModel) {
         ContentValues values = new ContentValues();
         values.put(DBHelper.OrdersEntry.COLUMN_ORDER_ID, orderModel.getOrderID());

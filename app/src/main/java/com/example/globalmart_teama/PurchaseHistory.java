@@ -56,6 +56,9 @@ public class PurchaseHistory extends Fragment {
         orderList.setAdapter(new GridItemOrders(getActivity(), list1));
 
 
+
+
+
         //orderList.setOnClickListener();
 
         /*orderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
