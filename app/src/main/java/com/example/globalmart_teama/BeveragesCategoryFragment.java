@@ -52,6 +52,7 @@ public class BeveragesCategoryFragment extends Fragment {
                 String productCategoryName = currBeverage.getProductCategoryName();
                 String productCountryName = currBeverage.getProductCountryName();
 
+                detailsBundle.putInt("productID", productId);
                 detailsBundle.putString("productName", productName);
                 detailsBundle.putString("beverageDesc", productDesc);
                 detailsBundle.putInt("beveragePrice", productPrice);

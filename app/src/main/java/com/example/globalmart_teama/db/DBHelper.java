@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 
+import javax.sql.CommonDataSource;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     private Context context;
@@ -24,6 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
         public static final String COLUMN_PRODUCT_IMAGE_ID = "product_image_id";
         public static final String COLUMN_COUNTRY_NAME = "product_country_name";
         public static final String COLUMN_CATEGORY_NAME = "product_category_name";
+        public static final String COLUMN_PRODUCT_CODE = "product_code";
     }
 
 
@@ -45,7 +48,8 @@ public class DBHelper extends SQLiteOpenHelper {
                     ProductsEntry.COLUMN_PRODUCT_PRICE + INTEGER_TYPE + COMMA_SEP +
                     ProductsEntry.COLUMN_PRODUCT_IMAGE_ID + TEXT_TYPE + COMMA_SEP +
                     ProductsEntry.COLUMN_CATEGORY_NAME + TEXT_TYPE + COMMA_SEP +
-                    ProductsEntry.COLUMN_COUNTRY_NAME + TEXT_TYPE +" )";
+                    ProductsEntry.COLUMN_COUNTRY_NAME + TEXT_TYPE + COMMA_SEP +
+                    ProductsEntry.COLUMN_PRODUCT_CODE + TEXT_TYPE +" )";
 
 
     private static final String SQL_CREATE_ORDER_TABLE =

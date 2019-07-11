@@ -9,9 +9,12 @@ public class ProductsModel {
     public String productImageID;
     public String productCountryName;
     public String productCategoryName;
+    public String productCode;
+    public int productCartQuantity = 0;
 
     public ProductsModel(int id, String productName, String productDesc, int productPrice,
-                         String productImageID, String productCountryName, String  productCategoryName) {
+                         String productImageID, String productCountryName, String  productCategoryName,
+                         String productCode) {
         this.productID = id;
         this.productName = productName;
         this.productDesc = productDesc;
@@ -19,6 +22,7 @@ public class ProductsModel {
         this.productImageID = productImageID;
         this.productCountryName = productCountryName;
         this.productCategoryName = productCategoryName;
+        this.productCode = productCode;
     }
 
     public int getProductID() {
@@ -75,5 +79,20 @@ public class ProductsModel {
 
     public void setProductCategoryName(String productCategoryName) {
         this.productCategoryName = productCategoryName;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+    public int getProductCartQuantity() {
+        return productCartQuantity;
+    }
+
+    public void setProductCartQuantity(int productCartQuantity) {
+        this.productCartQuantity = productCartQuantity;
     }
 }
