@@ -156,7 +156,7 @@ static{
         PRODUCT_CODES.put(8, "1243");
         PRODUCT_CODES.put(9, "434");
         PRODUCT_CODES.put(10, "4325");
-}
+
     }
 
 
