@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -23,7 +24,14 @@ public class PaymentConfirmationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_payment_confirmation, container, false);
+        View view = inflater.inflate(R.layout.fragment_payment_confirmation, container, false);;
+
+        Bundle dataBundle = getArguments();
+        String orderID = dataBundle.getString("orderID", "N/A");
+        TextView txtOrderID = view.findViewById(R.id.txtOrderID);
+        txtOrderID.setText(orderID);
+
+        return view;
     }
 
 }

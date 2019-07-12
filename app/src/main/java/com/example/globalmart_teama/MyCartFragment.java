@@ -1,28 +1,22 @@
 package com.example.globalmart_teama;
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.globalmart_teama.db.Database;
 import com.example.globalmart_teama.db.ProductsModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -33,9 +27,13 @@ import java.util.Random;
  */
 public class MyCartFragment extends Fragment {
 
+    SharedPreferences shref;
+    Gson gson;
+    SharedPreferences.Editor editor;
+    double totalPrice;
 
     public MyCartFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -46,31 +44,46 @@ public class MyCartFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_my_cart, container, false);
 
         ArrayList<ProductsModel> lstArrayList = null;
+        GridView productsOrderedGrid = (GridView) view.findViewById(R.id.cartGrid);
+        TextView txtTotalPrice = (TextView) view.findViewById(R.id.txtTotalPrice);
+        TextView lblTotalPrice = (TextView) view.findViewById(R.id.lblTotal);
+        Button btnPayment = (Button) view.findViewById(R.id.btnPayment);
 
         // get products from shared preferences
-        SharedPreferences shref = getActivity().getSharedPreferences("CARTLIST", Context.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String response = shref.getString("CARTLIST", "");
-        lstArrayList = gson.fromJson(response,
+        shref = getActivity().getSharedPreferences("CARTLIST", Context.MODE_PRIVATE);
+        gson = new Gson();
+        lstArrayList = gson.fromJson(shref.getString("CARTLIST", ""),
                 new TypeToken<List<ProductsModel>>() {
                 }.getType());
 
         if (lstArrayList == null) {
             lstArrayList = new ArrayList<>();
         }
-        // set the data to grid
-        GridView productsOrderedGrid = (GridView) view.findViewById(R.id.cartGrid);
-        productsOrderedGrid.setAdapter(new MyCartGridItem(getActivity(), lstArrayList));
 
-        //print total price
-        int price = 0;
-        for (ProductsModel p : lstArrayList) {
-            price += p.getProductPrice() * p.getProductCartQuantity();
+        if (lstArrayList.size() != 0) {
+            // set the data to grid
+            productsOrderedGrid.setAdapter(new MyCartGridItem(getActivity(), lstArrayList));
+
+            //print total price
+            int price = 0;
+            for (ProductsModel p : lstArrayList) {
+                price += p.getProductPrice() * p.getProductCartQuantity();
+            }
+            totalPrice = price + (0.15 * price);
+            TextView txtPrice = (TextView) view.findViewById(R.id.txtTotalPrice);
+            txtPrice.setText("$" + totalPrice);
+
+            //set visibility of labels and button
+            txtTotalPrice.setVisibility(View.VISIBLE);
+            lblTotalPrice.setVisibility(View.VISIBLE);
+            btnPayment.setVisibility(View.VISIBLE);
+        } else {
+            txtTotalPrice.setVisibility(View.INVISIBLE);
+            lblTotalPrice.setVisibility(View.INVISIBLE);
+            btnPayment.setVisibility(View.INVISIBLE);
         }
-        double totalPrice = price + (0.15 * price);
-        TextView txtPrice = (TextView) view.findViewById(R.id.txtTotalPrice);
-        txtPrice.setText("$" + totalPrice);
 
+        // Plus/minus click handler
         productsOrderedGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adaptor, View v, int listIndex, long arg3) {
@@ -80,17 +93,15 @@ public class MyCartFragment extends Fragment {
 
                 switch (v.getId()) {
                     case R.id.btnplus:
-                        ProductsModel row = (ProductsModel) adaptor.getItemAtPosition(listIndex);
-
+                        // change quantity
                         int q = Integer.parseInt(txtQty.getText().toString()) + 1;
                         String txt = q + "";
                         txtQty.setText(txt);
 
-                        //update shared preferences
-                        SharedPreferences shref = getActivity().getSharedPreferences("CARTLIST", Context.MODE_PRIVATE);
-                        Gson gson = new Gson();
-                        String response = shref.getString("CARTLIST", "");
-                        ArrayList<ProductsModel> lst = gson.fromJson(response,
+                        //get shared preferences and update quantities
+                        shref = getActivity().getSharedPreferences("CARTLIST", Context.MODE_PRIVATE);
+                        gson = new Gson();
+                        ArrayList<ProductsModel> lst = gson.fromJson(shref.getString("CARTLIST", ""),
                                 new TypeToken<List<ProductsModel>>() {
                                 }.getType());
 
@@ -102,14 +113,11 @@ public class MyCartFragment extends Fragment {
                         }
 
                         //put it back
-                        SharedPreferences.Editor editor;
                         editor = shref.edit();
                         editor.remove("CARTLIST").commit();
-                        String newJson = gson.toJson(lst);
-                        editor.putString("CARTLIST", newJson);
-                        editor.commit();
+                        editor.putString("CARTLIST", gson.toJson(lst)).commit();
 
-                        //print total price
+                        //update total price
                         int price = 0;
                         for (ProductsModel p : lst) {
                             price += p.getProductPrice() * p.getProductCartQuantity();
@@ -119,18 +127,17 @@ public class MyCartFragment extends Fragment {
 
                         break;
                     case R.id.btnminus:
-//                        ProductsModel row = (ProductsModel) adaptor.getItemAtPosition(listIndex);
-
                         if (!txtQty.getText().toString().equals("0")) {
+
+                            //change quantity
                             int q2 = Integer.parseInt(txtQty.getText().toString()) - 1;
                             String txt2 = q2 + "";
                             txtQty.setText(txt2);
 
-                            //update shared preferences
-                            SharedPreferences shref2 = getActivity().getSharedPreferences("CARTLIST", Context.MODE_PRIVATE);
-                            Gson gson2 = new Gson();
-                            String response2 = shref2.getString("CARTLIST", "");
-                            ArrayList<ProductsModel> lst2 = gson2.fromJson(response2,
+                            //get shared preferences and update quantities
+                            shref = getActivity().getSharedPreferences("CARTLIST", Context.MODE_PRIVATE);
+                            gson = new Gson();
+                            ArrayList<ProductsModel> lst2 = gson.fromJson(shref.getString("CARTLIST", ""),
                                     new TypeToken<List<ProductsModel>>() {
                                     }.getType());
 
@@ -144,14 +151,11 @@ public class MyCartFragment extends Fragment {
                             }
 
                             //put it back
-                            SharedPreferences.Editor editor2;
-                            editor = shref2.edit();
+                            editor = shref.edit();
                             editor.remove("CARTLIST").commit();
-                            String newJson2 = gson2.toJson(lst2);
-                            editor.putString("CARTLIST", newJson2);
-                            editor.commit();
+                            editor.putString("CARTLIST", gson.toJson(lst2)).commit();
 
-                            //print total price
+                            //update total price
                             int price2 = 0;
                             for (ProductsModel p : lst2) {
                                 price2 += p.getProductPrice() * p.getProductCartQuantity();
@@ -165,19 +169,26 @@ public class MyCartFragment extends Fragment {
             }
         });
 
-
-        Button btnPayment = (Button) view.findViewById(R.id.btnPayment);
+        // "proceed to payment" button click handler
         btnPayment.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                String orderID=generateOrderID();
+                String orderID = generateOrderID();
+
                 updateOrdersTable(orderID);
+
+                clearCart();
+
+                Bundle detailsBundle = new Bundle();
+                detailsBundle.putString("orderID", orderID);
+                PaymentConfirmationFragment fragment = new PaymentConfirmationFragment();
+                fragment.setArguments(detailsBundle);
 
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(((ViewGroup)(getView().getParent())).getId()
-                        , new PaymentConfirmationFragment(), "PAYMENT");
+                ft.replace(((ViewGroup) (getView().getParent())).getId()
+                        , fragment, "PAYMENT");
                 ft.addToBackStack(null);
                 ft.commit();
             }
@@ -186,23 +197,40 @@ public class MyCartFragment extends Fragment {
         return view;
     }
 
+    private void clearCart() {
+        SharedPreferences preferences = getActivity().getSharedPreferences("CARTLIST", Context.MODE_PRIVATE);
+        preferences.edit().clear().commit();
+    }
+
     private void updateOrdersTable(String orderID) {
         final Database database = new Database(getActivity());
-        database.
+        shref = getActivity().getSharedPreferences("CARTLIST", Context.MODE_PRIVATE);
+        gson = new Gson();
+        String response = shref.getString("CARTLIST", "");
+        List<ProductsModel> lstArrayList = gson.fromJson(response,
+                new TypeToken<List<ProductsModel>>() {
+                }.getType());
+
+        for (ProductsModel product : lstArrayList) {
+            int pID = product.getProductID();
+            int pUnitPrice = product.getProductPrice();
+            int pQty = product.getProductCartQuantity();
+
+            database.createOrder(orderID, pID, pUnitPrice, pQty, totalPrice, 123);
+        }
     }
 
     private String generateOrderID() {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder sb = new StringBuilder();
         Random rnd = new Random();
-        while (sb.length() < 5) { // length of the random string.
+        while (sb.length() < 6) { // length of the random string.
             int index = (int) (rnd.nextFloat() * chars.length());
             sb.append(chars.charAt(index));
         }
         String orderID = sb.toString();
         return orderID;
     }
-
 
 
 }

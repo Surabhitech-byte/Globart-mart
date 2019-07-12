@@ -75,17 +75,17 @@ public class MyCartGridItem extends BaseAdapter {
 
         // product name
         TextView textView = (TextView) convertView.findViewById(R.id.txtProduct);
-        textView.setText(cartList.get(position).productName);
+        textView.setText(cartList.get(position).getProductName());
 
         // product image
         ImageView imageView = (ImageView) convertView.findViewById(R.id.imgProduct);
-        String imageID = cartList.get(position).productImageID;
+        String imageID = cartList.get(position).getProductImageID();
         int id = mActivity.getResources().getIdentifier(imageID, "drawable", mActivity.getPackageName());
         imageView.setImageResource(id);
 
         // product price
         TextView textViewPrice = (TextView) convertView.findViewById(R.id.txtCartPrice);
-        textViewPrice.setText("$" + cartList.get(position).productPrice);
+        textViewPrice.setText("$" + cartList.get(position).getProductPrice());
 
         // product quantity
         TextView textViewQty = (TextView) convertView.findViewById(R.id.txtQuantity);

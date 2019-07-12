@@ -15,6 +15,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final String TEXT_TYPE = " TEXT";
     private static final String INTEGER_TYPE = " INTEGER";
+    private static final String DOUBLE_TYPE = " DOUBLE";
     private static final String COMMA_SEP = ",";
 
     public static abstract class ProductsEntry implements BaseColumns {
@@ -36,7 +37,8 @@ public class DBHelper extends SQLiteOpenHelper {
         public static final String COLUMN_PRODUCT_ID = "product_id";
         public static final String COLUMN_QUANTITY_ = "product_quantity";
         public static final String COLUMN_CUSTOMER_ID = "customer_id";
-
+        public static final String COLUMN_UNIT_PRICE = "unit_price";
+        public static final String COLUMN_TOTAL_PRICE = "total_price";
     }
 
 
@@ -54,9 +56,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_ORDER_TABLE =
             "CREATE TABLE IF NOT EXISTS " + OrdersEntry.TABLE_NAME + " (" +
-                    OrdersEntry.COLUMN_ORDER_ID + " INTEGER PRIMARY KEY" + COMMA_SEP +
+                    OrdersEntry.COLUMN_ORDER_ID + TEXT_TYPE + COMMA_SEP +
                     OrdersEntry.COLUMN_PRODUCT_ID + INTEGER_TYPE + COMMA_SEP +
+                    OrdersEntry.COLUMN_UNIT_PRICE + DOUBLE_TYPE + COMMA_SEP +
                     OrdersEntry.COLUMN_QUANTITY_+ INTEGER_TYPE + COMMA_SEP +
+                    OrdersEntry.COLUMN_TOTAL_PRICE + DOUBLE_TYPE + COMMA_SEP +
                     OrdersEntry.COLUMN_CUSTOMER_ID + INTEGER_TYPE +" )";
 
 
@@ -93,10 +97,10 @@ public class DBHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public void deleteOrder(int orderId)
+    public void deleteOrder(String orderId)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(DBHelper.OrdersEntry.TABLE_NAME, DBHelper.OrdersEntry.COLUMN_ORDER_ID + "=?", new String[]{Integer.toString(orderId)});
+        db.delete(DBHelper.OrdersEntry.TABLE_NAME, DBHelper.OrdersEntry.COLUMN_ORDER_ID + "=?", new String[]{ orderId});
 
 
 
