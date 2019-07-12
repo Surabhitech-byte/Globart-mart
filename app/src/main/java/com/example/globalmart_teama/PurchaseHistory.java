@@ -41,7 +41,7 @@ public class PurchaseHistory extends Fragment {
         final Database database = new Database(getActivity());
         GridView orderList =  (GridView) view.findViewById(R.id.grid);
         List<OrderModel> list1 = new ArrayList<>();
-        list1 = database.getOrdersModels();
+        list1 = database.getAllOrders();
 
         System.out.println("list item"+list1);
         Iterator i = list1.iterator();

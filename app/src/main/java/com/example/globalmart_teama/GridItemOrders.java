@@ -90,10 +90,10 @@ public class GridItemOrders extends BaseAdapter {
 
         final LinearLayout linearLayout = (LinearLayout) convertView.findViewById(R.id.linear_layout);
 
-        textView.setText(mOrderModelList.get(position).OrderID+"");
-        txt_Product_id.setText(mOrderModelList.get(position).ProductID+"");
+        textView.setText(mOrderModelList.get(position).getOrderID()+"");
+        txt_Product_id.setText(mOrderModelList.get(position).getProductID()+"");
 
-        txt_quantity.setText(mOrderModelList.get(position).Quantity+"");
+        txt_quantity.setText(mOrderModelList.get(position).getQuantity()+"");
 
         OrderModel pd = mOrderModelList.get(position);
 

@@ -2,15 +2,15 @@ package com.example.globalmart_teama.db;
 
 public class ProductsModel {
 
-    public int productID;
-    public String productName;
-    public String productDesc;
-    public int productPrice;
-    public String productImageID;
-    public String productCountryName;
-    public String productCategoryName;
-    public String productCode;
-    public int productCartQuantity = 0;
+    private int productID;
+    private String productName;
+    private String productDesc;
+    private int productPrice;
+    private String productImageID;
+    private String productCountryName;
+    private String productCategoryName;
+    private String productCode;
+    private int productCartQuantity = 0;
 
     public ProductsModel(int id, String productName, String productDesc, int productPrice,
                          String productImageID, String productCountryName, String  productCategoryName,

@@ -2,47 +2,68 @@ package com.example.globalmart_teama.db;
 
 public class OrderModel {
 
-    public int OrderID;
-    public int ProductID;
-    public int Quantity;
-    public int CustomerID;
+    private String orderID;
+    private int productID;
+    private int quantity;
+    private int customerID;
+    private double unitPrice;
+    private double totalPrice;
 
-    public OrderModel(int orderID, int productID, int quantity, int customerID) {
-        OrderID = orderID;
-        ProductID = productID;
-        Quantity = quantity;
-        CustomerID = customerID;
+    public OrderModel(String orderID, int productID,double unitPrice, int quantity
+            ,double totalPrice, int customerID) {
+        this.orderID = orderID;
+        this.productID = productID;
+        this.quantity = quantity;
+        this.customerID = customerID;
+        this.unitPrice = unitPrice;
+        this.totalPrice = totalPrice;
     }
 
-    public int getOrderID() {
-        return OrderID;
+    public String getOrderID() {
+        return orderID;
     }
 
-    public void setOrderID(int orderID) {
-        this.OrderID = orderID;
+    public void setOrderID(String orderID) {
+        this.orderID = orderID;
     }
 
     public int getProductID() {
-        return ProductID;
+        return productID;
     }
 
     public void setProductID(int productID) {
-        this.ProductID = productID;
+        this.productID = productID;
     }
 
     public int getQuantity() {
-        return Quantity;
+        return quantity;
     }
 
     public void setQuantity(int quantity) {
-        this.Quantity = quantity;
+        this.quantity = quantity;
     }
 
     public int getCustomerID() {
-        return CustomerID;
+        return customerID;
     }
 
     public void setCustomerID(int customerID) {
-        this.CustomerID = customerID;
+        this.customerID = customerID;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

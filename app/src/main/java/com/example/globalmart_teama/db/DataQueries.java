@@ -31,7 +31,9 @@ public class DataQueries {
     private String[] orderColumns = {
             DBHelper.OrdersEntry.COLUMN_ORDER_ID,
             DBHelper.OrdersEntry.COLUMN_PRODUCT_ID,
+            DBHelper.OrdersEntry.COLUMN_UNIT_PRICE,
             DBHelper.OrdersEntry.COLUMN_QUANTITY_,
+            DBHelper.OrdersEntry.COLUMN_TOTAL_PRICE,
             DBHelper.OrdersEntry.COLUMN_CUSTOMER_ID};
 
 
@@ -71,27 +73,16 @@ public class DataQueries {
         return productDataFromCursor;
     }
 
-
-
-
-
-    public OrderModel createOrder(OrderModel orderModel) {
+    public void createOrder(OrderModel orderModel) {
         ContentValues values = new ContentValues();
         values.put(DBHelper.OrdersEntry.COLUMN_ORDER_ID, orderModel.getOrderID());
         values.put(DBHelper.OrdersEntry.COLUMN_PRODUCT_ID, orderModel.getProductID());
+        values.put(DBHelper.OrdersEntry.COLUMN_UNIT_PRICE, orderModel.getUnitPrice());
         values.put(DBHelper.OrdersEntry.COLUMN_QUANTITY_, orderModel.getQuantity());
+        values.put(DBHelper.OrdersEntry.COLUMN_TOTAL_PRICE, orderModel.getTotalPrice());
         values.put(DBHelper.OrdersEntry.COLUMN_CUSTOMER_ID, orderModel.getCustomerID());
 
         long insertId = database.insert(DBHelper.OrdersEntry.TABLE_NAME, null, values);
-
-        Cursor cursor = database.query(DBHelper.OrdersEntry.TABLE_NAME,
-                orderColumns, DBHelper.OrdersEntry.COLUMN_ORDER_ID + " = " + insertId,
-                null, null, null, null);
-        ((Cursor) cursor).moveToFirst();
-        OrderModel orderDataFromCursor = getOrderDataFromCursor(cursor);
-        cursor.close();
-
-        return orderDataFromCursor;
     }
 
     public List<ProductsModel> getAllProducts() {
@@ -136,8 +127,8 @@ public class DataQueries {
     }
 
     private OrderModel getOrderDataFromCursor(Cursor cursor){
-        return new OrderModel(cursor.getInt(0), cursor.getInt(1),
-                cursor.getInt(2), cursor.getInt(3));
+        return new OrderModel(cursor.getString(0), cursor.getInt(1),
+                cursor.getDouble(2), cursor.getInt(3), cursor.getDouble(4), cursor.getInt(5));
     }
 
     public boolean isAppRunningFirstTime() {

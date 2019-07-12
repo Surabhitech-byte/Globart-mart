@@ -19,13 +19,6 @@ public class Database {
     private static final Map<Integer, String> PRODUCT_IMAGE_IDS = new HashMap<>();
     private static final Map<Integer, String> PRODUCT_CATEGORY_NAMES = new HashMap<>();
     private static final Map<Integer, String> PRODUCT_COUNTRY_NAMES = new HashMap<>();
-
-    private static final Map<Integer, Integer> ORDER_ID = new HashMap<>();
-    private static final Map<Integer, Integer> CUSTOMER_ID = new HashMap<>();
-    private static final Map<Integer, Integer> PRODUCT_ID = new HashMap<>();
-    private static final Map<Integer, Integer> QUANTITY = new HashMap<>();
-
-
     private static final Map<Integer, String> PRODUCT_CODES = new HashMap<>();
 
 
@@ -110,42 +103,6 @@ public class Database {
 
     static {
 
-        ORDER_ID.put(1, 101);
-        ORDER_ID.put(2, 102);
-        ORDER_ID.put(3, 103);
-        ORDER_ID.put(4, 104);
-        ORDER_ID.put(5, 105);
-    }
-
-    static {
-        CUSTOMER_ID.put(1, 255);
-        CUSTOMER_ID.put(2, 256);
-        CUSTOMER_ID.put(3, 257);
-        CUSTOMER_ID.put(4, 258);
-        CUSTOMER_ID.put(5, 259);
-    }
-
-    static {
-
-        PRODUCT_ID.put(1, 301);
-        PRODUCT_ID.put(2, 302);
-        PRODUCT_ID.put(3, 303);
-        PRODUCT_ID.put(5, 305);
-        PRODUCT_ID.put(4, 304);
-
-    }
-
-    static {
-        QUANTITY.put(1, 3);
-        QUANTITY.put(2, 4);
-        QUANTITY.put(3, 1);
-        QUANTITY.put(4, 2);
-        QUANTITY.put(5, 1);
-
-    }
-
-static{
-
         PRODUCT_CODES.put(1, "9780123456786");
         PRODUCT_CODES.put(2, "123");
         PRODUCT_CODES.put(3, "152");
@@ -175,32 +132,14 @@ static{
                                 PRODUCT_CODES.get(key)));
 
             }
-            for (int key1 : ORDER_ID.keySet()) {
-
-                dataQueries.createOrder(
-                        new OrderModel(ORDER_ID.get(key1), PRODUCT_ID.get(key1), QUANTITY.get(key1),
-                                CUSTOMER_ID.get(key1)));
-
-
-                System.out.println("Order : "+key1+"Product : "+PRODUCT_ID.get(key1)+"Quantity : "+QUANTITY.get(key1)+"Customer : "+CUSTOMER_ID.get(key1));
-
-
-            }
-
-
         }
 
         productsModelList = dataQueries.getAllProducts();
-        ordersModelList = dataQueries.getAllOrders();
     }
 
 
     public List<ProductsModel> getProductsModels() {
         return productsModelList;
-    }
-
-    public List<OrderModel> getOrdersModels() {
-        return ordersModelList;
     }
 
     public void closeDatabase() {
@@ -218,8 +157,9 @@ static{
     }
 
     public OrderModel getOrderModelByID(int orderID) {
+        ordersModelList = this.getAllOrders();
         for (OrderModel curr : ordersModelList) {
-            if (curr.getOrderID() == orderID) {
+            if (curr.getOrderID().equals(orderID)) {
                 return curr;
             }
         }
@@ -227,5 +167,14 @@ static{
         return null;
     }
 
+    public void createOrder(String orderID, int productID, double unitPrice, int quantity
+            , double totalPrice, int customerID) {
+        dataQueries.createOrder(
+                new OrderModel(orderID, productID, unitPrice, quantity, totalPrice, customerID));
+    }
+
+    public List<OrderModel> getAllOrders(){
+        return dataQueries.getAllOrders();
+    }
 }
 
