@@ -17,6 +17,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.globalmart_teama.db.Database;
 import com.example.globalmart_teama.db.ProductsModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -24,6 +25,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -169,6 +171,9 @@ public class MyCartFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
+                String orderID=generateOrderID();
+                updateOrdersTable(orderID);
+
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(((ViewGroup)(getView().getParent())).getId()
@@ -180,6 +185,24 @@ public class MyCartFragment extends Fragment {
 
         return view;
     }
+
+    private void updateOrdersTable(String orderID) {
+        final Database database = new Database(getActivity());
+        database.
+    }
+
+    private String generateOrderID() {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder sb = new StringBuilder();
+        Random rnd = new Random();
+        while (sb.length() < 5) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * chars.length());
+            sb.append(chars.charAt(index));
+        }
+        String orderID = sb.toString();
+        return orderID;
+    }
+
 
 
 }
