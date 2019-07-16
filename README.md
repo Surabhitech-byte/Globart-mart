@@ -1,2 +1,2 @@
 # GlobalMart-TeamA
-fsapplication 1
+fs sfapplication 1
