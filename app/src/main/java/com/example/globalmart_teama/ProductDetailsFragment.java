@@ -52,9 +52,9 @@ public class ProductDetailsFragment extends Fragment {
         Bundle dataBundle = getArguments();
         final int productID = dataBundle.getInt("productID", -1);
         final String name = dataBundle.getString("productName", "N/A");
-        final String desc = dataBundle.getString("beverageDesc", "N/A");
-        final int price = dataBundle.getInt("beveragePrice", -1);
-        final String imgId = dataBundle.getString("beverageImageId", "N/A");
+        final String desc = dataBundle.getString("productDesc", "N/A");
+        final int price = dataBundle.getInt("productPrice", -1);
+        final String imgId = dataBundle.getString("productImageId", "N/A");
 
         imgProductTitle.setText(name);
         imgDescription.setText(desc);

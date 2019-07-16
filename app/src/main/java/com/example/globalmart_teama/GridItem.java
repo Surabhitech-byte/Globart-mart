@@ -14,27 +14,19 @@ import com.example.globalmart_teama.db.ProductsModel;
 import java.util.List;
 
 public class GridItem extends BaseAdapter {
-    private List<ProductsModel> mBeverageModelList;
-    private boolean isBeverage;
+    private List<ProductsModel> mProductModelList;
     private Activity mActivity;
 
-    public GridItem(Activity activity, List<ProductsModel> mBeverageModelList, boolean isBeverage) {
+    public GridItem(Activity activity, List<ProductsModel> mProductModelList) {
         this.mActivity = activity;
-        this.mBeverageModelList = mBeverageModelList;
-        this.isBeverage = isBeverage;
-    }
-
-
-    public GridItem(Activity activity, List<ProductsModel> mBeverageModelList) {
-        this.mActivity = activity;
-        this.mBeverageModelList = mBeverageModelList;
+        this.mProductModelList = mProductModelList;
     }
 
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
         // return (mIsStudent ? mStudentModelList.size() : mCourseModelList.size());
-        return mBeverageModelList.size();
+        return mProductModelList.size();
     }
 
 
@@ -42,7 +34,7 @@ public class GridItem extends BaseAdapter {
     public Object getItem(int position) {
         // TODO Auto-generated method stub
 //        return (mIsStudent ? mStudentModelList.get(position) : mCourseModelList.get(position));
-        return mBeverageModelList.get(position);
+        return mProductModelList.get(position);
     }
 
     @Override
@@ -59,10 +51,10 @@ public class GridItem extends BaseAdapter {
         }
 
         TextView textView = (TextView) convertView.findViewById(R.id.txtProduct);
-        textView.setText(mBeverageModelList.get(position).getProductName());
+        textView.setText(mProductModelList.get(position).getProductName());
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.imgProduct);
-        String imageID = mBeverageModelList.get(position).getProductImageID();
+        String imageID = mProductModelList.get(position).getProductImageID();
 
         int id = mActivity.getResources().getIdentifier(imageID, "drawable", mActivity.getPackageName());
         imageView.setImageResource(id);
