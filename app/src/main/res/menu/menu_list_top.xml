@@ -8,9 +8,9 @@
             android:icon="@drawable/ic_shopping_cart_black_24dp"
             android:title="My Cart" />
         <item
-            android:id="@+id/my_orders_id"
-            android:icon="@drawable/ic_my_order_24dp"
-            android:title="My Order" />
+            android:id="@+id/about_us_id"
+            android:icon="@drawable/ic_feedback_black_24dp"
+            android:title="About Us" />
         <item
             android:id="@+id/need_help_id"
             android:icon="@drawable/ic_help_black_24dp"
@@ -21,7 +21,7 @@
             android:title="Purchase History" />
         <item
             android:id="@+id/feedback_id"
-            android:icon="@drawable/ic_feedback_black_24dp"
+            android:icon="@drawable/ic_recommendations_24dp"
             android:title="Recommendations" />
 
     </group>

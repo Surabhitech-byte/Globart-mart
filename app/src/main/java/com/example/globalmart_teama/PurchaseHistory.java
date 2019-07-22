@@ -65,7 +65,7 @@ public class PurchaseHistory extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adaptor, View v, int listIndex, long arg3) {
                 System.out.println("Inside on item click");
-                MyOrdersFragment fragment = new MyOrdersFragment();
+                AboutUsFragment fragment = new AboutUsFragment();
 
 
                 FragmentManager fm = getFragmentManager();

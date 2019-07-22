@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -44,6 +42,11 @@ public class    MenuActivity extends AppCompatActivity {
         togglelayout.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_container, new HomeFragment());
+        fragmentTransaction.commit();
+        getSupportActionBar().setTitle("Home");
+
         bottomView = findViewById(R.id.bottom_nav);
         navigationView = findViewById(R.id.navigationView_id);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -59,11 +62,11 @@ public class    MenuActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         break;
-                    case R.id.my_orders_id:
+                    case R.id.about_us_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new MyOrdersFragment());
+                        fragmentTransaction.replace(R.id.main_container, new AboutUsFragment());
                         fragmentTransaction.commit();
-                        getSupportActionBar().setTitle("My Orders");
+                        getSupportActionBar().setTitle("About Us");
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         break;
