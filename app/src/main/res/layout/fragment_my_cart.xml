@@ -26,9 +26,9 @@
     <LinearLayout
         android:layout_width="392dp"
         android:layout_height="62dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="25dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,7 +40,7 @@
 
         <TextView
             android:id="@+id/lblTotal"
-            android:layout_width="250dp"
+            android:layout_width="234dp"
             android:layout_height="62dp"
             android:text="Total Price After Taxes (15%):"
             android:textSize="20sp"
@@ -56,19 +56,20 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <Button
+    <ImageView
         android:id="@+id/btnPayment"
-        android:layout_width="201dp"
-        android:layout_height="52dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Proceed to Payment"
+        android:layout_marginBottom="56dp"
+        android:src="@drawable/btn_proceed_to_payment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.898" />
+        app:layout_constraintVertical_bias="0.972" />
 
 </android.support.constraint.ConstraintLayout>

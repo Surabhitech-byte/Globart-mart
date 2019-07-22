@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 
 /**
@@ -32,9 +33,9 @@ public class BrowseByStoresFragment extends Fragment {
         final Bundle bundle = new Bundle();
         final FragmentManager fm = getFragmentManager();
         final FragmentTransaction ft = fm.beginTransaction();
-        Button btnChinese = (Button) view.findViewById(R.id.btnChinese);
-        Button btnIndian = (Button) view.findViewById(R.id.btnIndian);
-        Button btnOthers = (Button) view.findViewById(R.id.btnOthers);
+        ImageView btnChinese = (ImageView) view.findViewById(R.id.btnChinese);
+        ImageView btnIndian = (ImageView) view.findViewById(R.id.btnIndian);
+        ImageView btnOthers = (ImageView) view.findViewById(R.id.btnOthers);
 
         btnChinese.setOnClickListener(new View.OnClickListener() {
             @Override

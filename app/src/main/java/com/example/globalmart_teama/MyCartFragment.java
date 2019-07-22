@@ -2,6 +2,7 @@ package com.example.globalmart_teama;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.GridView;
 import android.widget.TextView;
 import com.example.globalmart_teama.db.Database;
@@ -47,7 +48,7 @@ public class MyCartFragment extends Fragment {
         GridView productsOrderedGrid = (GridView) view.findViewById(R.id.cartGrid);
         TextView txtTotalPrice = (TextView) view.findViewById(R.id.txtTotalPrice);
         TextView lblTotalPrice = (TextView) view.findViewById(R.id.lblTotal);
-        Button btnPayment = (Button) view.findViewById(R.id.btnPayment);
+        ImageView btnPayment = (ImageView) view.findViewById(R.id.btnPayment);
 
         // get products from shared preferences
         shref = getActivity().getSharedPreferences("CARTLIST", Context.MODE_PRIVATE);

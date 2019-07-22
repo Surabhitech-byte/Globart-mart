@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 
 /**
@@ -30,9 +31,9 @@ public class ShopByCategoryHomeFragment extends Fragment {
         final Bundle bundle = new Bundle();
         final FragmentManager fm = getFragmentManager();
         final FragmentTransaction ft = fm.beginTransaction();
-        Button btnBeverage = (Button) view.findViewById(R.id.btnBeverage);
-        Button btnGrocery = (Button) view.findViewById(R.id.btnGrocery);
-        Button btnFrtAndVeg = (Button) view.findViewById(R.id.btnFrtandVeg);
+        ImageView btnBeverage = (ImageView) view.findViewById(R.id.btnBeverage);
+        ImageView btnGrocery = (ImageView) view.findViewById(R.id.btnGrocery);
+        ImageView btnFrtAndVeg = (ImageView) view.findViewById(R.id.btnFrtandVeg);
 
         btnBeverage.setOnClickListener(new View.OnClickListener() {
             @Override
