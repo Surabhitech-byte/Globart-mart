@@ -11,41 +11,41 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.example.globalmart_teama.R;
 import com.example.globalmart_teama.db.Database;
 import com.example.globalmart_teama.db.ProductsModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsCategoryFragment extends Fragment {
-
+public class ProductsStoreFragment extends Fragment {
     List<ProductsModel> productsModelList = new ArrayList<>();
 
-    public ProductsCategoryFragment() {
+    public ProductsStoreFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_categories_products, container, false);
-        GridView productsGrid = (GridView) view.findViewById(R.id.grid);
-        TextView txtCategoryType = (TextView) view.findViewById(R.id.txtCategoryType);
+        View view = inflater.inflate(R.layout.fragment_store_products, container, false);
+
+        GridView productsGrid = (GridView) view.findViewById(R.id.storeGrid);
+        TextView txtStoreType = (TextView) view.findViewById(R.id.txtStoreType);
 
         final Database database = new Database(getActivity());
 
         Bundle dataBundle = getArguments();
-        String categoryType = dataBundle.getString("CategoryType", "N/A");
-        if (categoryType.equals("Beverages")) {
-            txtCategoryType.setText("BEVERAGES");
-            productsModelList = database.getProductsByCategory("Beverages");
-        } else if (categoryType.equals("Groceries")) {
-            txtCategoryType.setText("GROCERIES");
-            productsModelList = database.getProductsByCategory("Groceries");
-        } else if (categoryType.equals("Fruits&Vegetables")) {
-            txtCategoryType.setText("FRUITS & VEGETABLES");
-            productsModelList = database.getProductsByCategory("Fruits&Vegetables");
+        String storeType = dataBundle.getString("StoreType", "N/A");
+        if (storeType.equals("Chinese")) {
+            txtStoreType.setText("CHINESE PRODUCTS");
+            productsModelList = database.getProductsByStore("China");
+        } else if (storeType.equals("Indian")) {
+            txtStoreType.setText("INDIAN PRODUCTS");
+            productsModelList = database.getProductsByStore("India");
+        } else if (storeType.equals("Others")) {
+            txtStoreType.setText("OTHER PRODUCTS");
+            productsModelList = database.getProductsByStore("Others");
         }
 
         productsGrid.setAdapter(new GridItem(getActivity(), productsModelList));

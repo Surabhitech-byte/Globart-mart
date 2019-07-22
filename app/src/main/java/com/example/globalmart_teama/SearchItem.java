@@ -99,28 +99,20 @@ public class SearchItem extends Fragment {
 
                 Bundle detailsBundle = new Bundle();
 
-                ProductsModel currBeverage = null;
+                ProductsModel currProduct = null;
 
                 for (ProductsModel name : df) {
                     if ((name.getProductName().toLowerCase()).equals(adapter.getItem(0).toLowerCase())) {
-                        currBeverage = name;
+                        currProduct = name;
 
                     }
                 }
-                int productId = currBeverage.getProductID();
-                String productName = currBeverage.getProductName();
-                String productDesc = currBeverage.getProductDesc();
-                int productPrice = currBeverage.getProductPrice();
-                String productImageId = currBeverage.getProductImageID();
-                String productCategoryName = currBeverage.getProductCategoryName();
-                String productCountryName = currBeverage.getProductCountryName();
 
-                detailsBundle.putString("productName", productName);
-                detailsBundle.putString("beverageDesc", productDesc);
-                detailsBundle.putInt("beveragePrice", productPrice);
-                detailsBundle.putString("beverageImageId", productImageId);
-                detailsBundle.putString("beverageCategory", productCategoryName);
-                detailsBundle.putString("beverageCountryId", productCountryName);
+                detailsBundle.putInt("productID", currProduct.getProductID());
+                detailsBundle.putString("productName", currProduct.getProductName());
+                detailsBundle.putString("productDesc", currProduct.getProductDesc());
+                detailsBundle.putInt("productPrice", currProduct.getProductPrice());
+                detailsBundle.putString("productImageId", currProduct.getProductImageID());
 
                 ProductDetailsFragment fragment = new ProductDetailsFragment();
                 fragment.setArguments(detailsBundle);

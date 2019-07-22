@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/beveragesCategoryFragment">
+    android:id="@+id/storeFragment">
 
     <TextView
-        android:id="@+id/txtCategoryType"
+        android:id="@+id/txtStoreType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.047" />
 
     <GridView
-        android:id="@+id/grid"
+        android:id="@+id/storeGrid"
         android:layout_width="match_parent"
         android:layout_height="512dp"
         android:fastScrollEnabled="true"
@@ -34,10 +34,10 @@
         android:horizontalSpacing="10dp"
         android:stretchMode="columnWidth"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline" />
+        app:layout_constraintTop_toBottomOf="@id/storeGuideline" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/storeGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
