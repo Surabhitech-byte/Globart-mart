@@ -406,8 +406,8 @@ public class Database {
         }
         else if(storeType.toUpperCase().equals("OTHERS") ){
             for (ProductsModel curr : productsModelList) {
-                if (!(curr.getProductCountryName().toUpperCase().equals("INDIA")
-                        && curr.getProductCountryName().toUpperCase().equals("CHINA"))) {
+                if (!curr.getProductCountryName().toUpperCase().equals("INDIA")
+                        && !curr.getProductCountryName().toUpperCase().equals("CHINA")) {
                     productsByStoreList.add(curr);
                 }
             }
