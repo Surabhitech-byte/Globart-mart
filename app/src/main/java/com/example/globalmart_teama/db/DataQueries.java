@@ -31,6 +31,8 @@ public class DataQueries {
     private String[] orderColumns = {
             DBHelper.OrdersEntry.COLUMN_ORDER_ID,
             DBHelper.OrdersEntry.COLUMN_PRODUCT_ID,
+            DBHelper.OrdersEntry.COLUMN_PRODUCT_NAME,
+            DBHelper.OrdersEntry.COLUMN_PRODUCT_IMAGE_ID,
             DBHelper.OrdersEntry.COLUMN_UNIT_PRICE,
             DBHelper.OrdersEntry.COLUMN_QUANTITY_,
             DBHelper.OrdersEntry.COLUMN_TOTAL_PRICE,
@@ -77,6 +79,8 @@ public class DataQueries {
         ContentValues values = new ContentValues();
         values.put(DBHelper.OrdersEntry.COLUMN_ORDER_ID, orderModel.getOrderID());
         values.put(DBHelper.OrdersEntry.COLUMN_PRODUCT_ID, orderModel.getProductID());
+        values.put(DBHelper.OrdersEntry.COLUMN_PRODUCT_NAME, orderModel.getProductName());
+        values.put(DBHelper.OrdersEntry.COLUMN_PRODUCT_IMAGE_ID, orderModel.getProductImageID());
         values.put(DBHelper.OrdersEntry.COLUMN_UNIT_PRICE, orderModel.getUnitPrice());
         values.put(DBHelper.OrdersEntry.COLUMN_QUANTITY_, orderModel.getQuantity());
         values.put(DBHelper.OrdersEntry.COLUMN_TOTAL_PRICE, orderModel.getTotalPrice());
@@ -127,8 +131,8 @@ public class DataQueries {
     }
 
     private OrderModel getOrderDataFromCursor(Cursor cursor){
-        return new OrderModel(cursor.getString(0), cursor.getInt(1),
-                cursor.getDouble(2), cursor.getInt(3), cursor.getDouble(4), cursor.getInt(5));
+        return new OrderModel(cursor.getString(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3),
+                cursor.getDouble(4), cursor.getInt(5), cursor.getDouble(6), cursor.getInt(7));
     }
 
     public boolean isAppRunningFirstTime() {

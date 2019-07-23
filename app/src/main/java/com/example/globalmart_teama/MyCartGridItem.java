@@ -3,6 +3,10 @@ package com.example.globalmart_teama;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +29,10 @@ public class MyCartGridItem extends BaseAdapter {
 
     private List<ProductsModel> cartList = new ArrayList<>();
     private Activity mActivity;
-    CartHolder holder;
+    SharedPreferences shref;
+    Gson gson;
+    SharedPreferences.Editor editor;
+    double totalPrice;
 
     public MyCartGridItem(Activity activity, List<ProductsModel> cartList) {
         this.mActivity = activity;
@@ -53,28 +60,16 @@ public class MyCartGridItem extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, final ViewGroup parent) {
+    public View getView(int position, View convertView, final ViewGroup parent) {
+        LayoutInflater layoutInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
-            LayoutInflater layoutInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.grid_item_mycart, null);
-
-            holder = new CartHolder();
-            holder.txtProductName = (TextView) convertView.findViewById(R.id.txtProduct);
-            holder.lblQuantity = (TextView) convertView.findViewById(R.id.txtQuantity);
-            holder.btnMinus = (ImageView) convertView.findViewById(R.id.btnminus);
-            holder.btnPlus = (ImageView) convertView.findViewById(R.id.btnplus);
-            convertView.setTag(holder);
-        } else {
-            holder = (CartHolder) convertView.getTag();
         }
 
-        holder.btnPlus.setTag(position);
-        holder.btnMinus.setTag(position);
-        holder.lblQuantity.setTag(position);
-        holder.txtProductName.setTag(position);
+        final View view = layoutInflater.inflate(R.layout.fragment_my_cart, null);
 
         // product name
-        TextView textView = (TextView) convertView.findViewById(R.id.txtProduct);
+        final TextView textView = (TextView) convertView.findViewById(R.id.txtProduct);
         textView.setText(cartList.get(position).getProductName());
 
         // product image
@@ -88,46 +83,102 @@ public class MyCartGridItem extends BaseAdapter {
         textViewPrice.setText("$" + cartList.get(position).getProductPrice());
 
         // product quantity
-        TextView textViewQty = (TextView) convertView.findViewById(R.id.txtQuantity);
+        final TextView textViewQty = (TextView) convertView.findViewById(R.id.txtQuantity);
         textViewQty.setText("" + cartList.get(position).getProductCartQuantity());
 
-        ProductsModel pd = cartList.get(position);
-        final int qty = pd.getProductCartQuantity();
+        ImageView btnMinus = (ImageView) convertView.findViewById(R.id.btnminus);
+        ImageView btnPlus = (ImageView) convertView.findViewById(R.id.btnplus);
 
-        // get products from shared preferences
-        final SharedPreferences shref = mActivity.getSharedPreferences("CARTLIST", Context.MODE_PRIVATE);
-        final Gson gson = new Gson();
-        String response = shref.getString("CARTLIST", "");
-        final ArrayList<ProductsModel> lstArrayList = gson.fromJson(response,
-                new TypeToken<List<ProductsModel>>() {
-                }.getType());
-
-        // Minus click
-        holder.btnMinus.setOnClickListener(new View.OnClickListener() {
-
+        btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((GridView)parent).performItemClick(v,position,0);
+                int qty = Integer.parseInt(textViewQty.getText().toString());
+                if (qty != 0) {
+                    qty -= 1;
+                    String x = qty + "";
+                    textViewQty.setText(x);
+
+                    //get shared preferences and update quantities
+                    shref = mActivity.getSharedPreferences("CARTLIST", Context.MODE_PRIVATE);
+                    gson = new Gson();
+                    ArrayList<ProductsModel> lst = gson.fromJson(shref.getString("CARTLIST", ""),
+                            new TypeToken<List<ProductsModel>>() {
+                            }.getType());
+
+                    for (ProductsModel p : lst) {
+                        if (p.getProductName().equals(textView.getText().toString())) {
+                            if (p.getProductCartQuantity() != 0) {
+                                p.setProductCartQuantity(p.getProductCartQuantity() - 1);
+                            }
+                            break;
+                        }
+                    }
+
+                    //put it back
+                    editor = shref.edit();
+                    editor.remove("CARTLIST").commit();
+                    editor.putString("CARTLIST", gson.toJson(lst)).commit();
+
+                    //update total price
+                    int price = 0;
+                    for (ProductsModel p : lst) {
+                        price += p.getProductPrice() * p.getProductCartQuantity();
+                    }
+                    double totalPrice = price + (0.15 * price);
+
+                    final TextView txtTotalPrice = (TextView) view.findViewById(R.id.txtTotalPrice);
+                    txtTotalPrice.setText("$" + totalPrice);
+                    FragmentManager fm = ((AppCompatActivity) parent.getContext()).getSupportFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    final MyCartFragment f = (MyCartFragment)fm.findFragmentByTag("MYCART");
+                    ft.detach(f).attach(f).commit();
+                }
             }
         });
 
-        holder.btnPlus.setOnClickListener(new View.OnClickListener() {
-
+        btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((GridView)parent).performItemClick(v,position,0);
+                int qty = Integer.parseInt(textViewQty.getText().toString());
+                qty += 1;
+                String x = qty + "";
+                textViewQty.setText(x);
+
+                //get shared preferences and update quantities
+                shref = mActivity.getSharedPreferences("CARTLIST", Context.MODE_PRIVATE);
+                gson = new Gson();
+                ArrayList<ProductsModel> lst2 = gson.fromJson(shref.getString("CARTLIST", ""),
+                        new TypeToken<List<ProductsModel>>() {
+                        }.getType());
+
+                for (ProductsModel p : lst2) {
+                    if (p.getProductName().equals(textView.getText().toString())) {
+                        p.setProductCartQuantity(p.getProductCartQuantity() + 1);
+                        break;
+                    }
+                }
+
+                //put it back
+                editor = shref.edit();
+                editor.remove("CARTLIST").commit();
+                editor.putString("CARTLIST", gson.toJson(lst2)).commit();
+
+                //update total price
+                int price2 = 0;
+                for (ProductsModel p : lst2) {
+                    price2 += p.getProductPrice() * p.getProductCartQuantity();
+                }
+                double totalPrice2 = price2 + (0.15 * price2);
+                final TextView txtTotalPrice = (TextView) view.findViewById(R.id.txtTotalPrice);
+                txtTotalPrice.setText("$" + totalPrice2);
+                FragmentManager fm = ((AppCompatActivity) parent.getContext()).getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                final MyCartFragment f = (MyCartFragment)fm.findFragmentByTag("MYCART");
+                ft.detach(f).attach(f).commit();
             }
         });
 
         return convertView;
-
-    }
-
-    static class CartHolder {
-        TextView txtProductName;
-        TextView lblQuantity;
-        ImageView btnPlus;
-        ImageView btnMinus;
     }
 
 }

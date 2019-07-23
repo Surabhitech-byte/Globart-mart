@@ -35,6 +35,8 @@ public class DBHelper extends SQLiteOpenHelper {
         public static final String TABLE_NAME = "orders";
         public static final String COLUMN_ORDER_ID = "order_id";
         public static final String COLUMN_PRODUCT_ID = "product_id";
+        public static final String COLUMN_PRODUCT_NAME = "product_name";
+        public static final String COLUMN_PRODUCT_IMAGE_ID = "product_image_id";
         public static final String COLUMN_QUANTITY_ = "product_quantity";
         public static final String COLUMN_CUSTOMER_ID = "customer_id";
         public static final String COLUMN_UNIT_PRICE = "unit_price";
@@ -58,6 +60,8 @@ public class DBHelper extends SQLiteOpenHelper {
             "CREATE TABLE IF NOT EXISTS " + OrdersEntry.TABLE_NAME + " (" +
                     OrdersEntry.COLUMN_ORDER_ID + TEXT_TYPE + COMMA_SEP +
                     OrdersEntry.COLUMN_PRODUCT_ID + INTEGER_TYPE + COMMA_SEP +
+                    OrdersEntry.COLUMN_PRODUCT_NAME + TEXT_TYPE + COMMA_SEP +
+                    OrdersEntry.COLUMN_PRODUCT_IMAGE_ID + TEXT_TYPE + COMMA_SEP +
                     OrdersEntry.COLUMN_UNIT_PRICE + DOUBLE_TYPE + COMMA_SEP +
                     OrdersEntry.COLUMN_QUANTITY_+ INTEGER_TYPE + COMMA_SEP +
                     OrdersEntry.COLUMN_TOTAL_PRICE + DOUBLE_TYPE + COMMA_SEP +

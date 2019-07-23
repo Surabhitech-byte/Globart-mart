@@ -370,10 +370,10 @@ public class Database {
         dataQueries.close();
     }
 
-    public void createOrder(String orderID, int productID, double unitPrice, int quantity
+    public void createOrder(String orderID, int productID, String productName, String productImgID, double unitPrice, int quantity
             , double totalPrice, int customerID) {
         dataQueries.createOrder(
-                new OrderModel(orderID, productID, unitPrice, quantity, totalPrice, customerID));
+                new OrderModel(orderID, productID, productName, productImgID, unitPrice, quantity, totalPrice, customerID));
     }
 
     public List<OrderModel> getAllOrders() {

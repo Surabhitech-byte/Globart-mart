@@ -17,6 +17,7 @@ import com.example.globalmart_teama.db.OrderModel;
 import com.example.globalmart_teama.db.ProductsModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,43 +40,19 @@ public class PurchaseHistory extends Fragment {
         View view = inflater.inflate(R.layout.fragment_purchase_history, container, false);
 
         final Database database = new Database(getActivity());
-        GridView orderList =  (GridView) view.findViewById(R.id.grid);
-        List<OrderModel> list1 = new ArrayList<>();
-        list1 = database.getAllOrders();
+        GridView orderGrid = (GridView) view.findViewById(R.id.grid);
+        List<OrderModel> dbOrdersList = new ArrayList<>();
+        dbOrdersList = database.getAllOrders();
+        HashMap<String, List<ProductsModel>> orderMap = new HashMap<>();
+//
+//        for (OrderModel item : dbOrdersList) {
+//            List<ProductsModel> pList = new ArrayList<>();
+//            pList = orderMap.get(item.getOrderID());
+//            ProductsModel product = new ProductsModel(item.getProductID(), );
+//            orderMap.put(item.getOrderID(), )
+//        }
 
-        System.out.println("list item"+list1);
-        Iterator i = list1.iterator();
-        while (i.hasNext())
-        {
-            System.out.println("ITEM IN LIST"+i.next());
-
-        }
-
-
-
-        orderList.setAdapter(new GridItemOrders(getActivity(), list1));
-
-
-
-
-
-        //orderList.setOnClickListener();
-
-        /*orderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adaptor, View v, int listIndex, long arg3) {
-                System.out.println("Inside on item click");
-                AboutUsFragment fragment = new AboutUsFragment();
-
-
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(((ViewGroup)(getView().getParent())).getId()
-                        , fragment, "New My order fragment");
-                ft.addToBackStack(null);
-                ft.commit();
-            }
-        });*/
+        orderGrid.setAdapter(new GridItemOrders(getActivity(), dbOrdersList));
 
         return view;
     }

@@ -56,7 +56,7 @@ public class    MenuActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.my_cart_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new MyCartFragment());
+                        fragmentTransaction.replace(R.id.main_container, new MyCartFragment(), "MYCART");
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("My Cart");
                         menuItem.setChecked(true);

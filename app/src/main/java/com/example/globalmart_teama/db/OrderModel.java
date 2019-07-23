@@ -4,15 +4,19 @@ public class OrderModel {
 
     private String orderID;
     private int productID;
+    private String productName;
+    private String productImageID;
     private int quantity;
     private int customerID;
     private double unitPrice;
     private double totalPrice;
 
-    public OrderModel(String orderID, int productID,double unitPrice, int quantity
+    public OrderModel(String orderID, int productID, String productName, String productImageID, double unitPrice, int quantity
             ,double totalPrice, int customerID) {
         this.orderID = orderID;
         this.productID = productID;
+        this.productName = productName;
+        this.productImageID = productImageID;
         this.quantity = quantity;
         this.customerID = customerID;
         this.unitPrice = unitPrice;
@@ -65,5 +69,21 @@ public class OrderModel {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductImageID() {
+        return productImageID;
+    }
+
+    public void setProductImageID(String productImageID) {
+        this.productImageID = productImageID;
     }
 }
