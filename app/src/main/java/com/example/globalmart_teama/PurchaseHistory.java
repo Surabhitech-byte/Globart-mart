@@ -19,6 +19,7 @@ import com.example.globalmart_teama.db.ProductsModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 
@@ -43,16 +44,27 @@ public class PurchaseHistory extends Fragment {
         GridView orderGrid = (GridView) view.findViewById(R.id.grid);
         List<OrderModel> dbOrdersList = new ArrayList<>();
         dbOrdersList = database.getAllOrders();
-        HashMap<String, List<ProductsModel>> orderMap = new HashMap<>();
-//
-//        for (OrderModel item : dbOrdersList) {
-//            List<ProductsModel> pList = new ArrayList<>();
-//            pList = orderMap.get(item.getOrderID());
-//            ProductsModel product = new ProductsModel(item.getProductID(), );
-//            orderMap.put(item.getOrderID(), )
-//        }
 
-        orderGrid.setAdapter(new GridItemOrders(getActivity(), dbOrdersList));
+        HashMap<String, List<OrderModel>> orderMap = new LinkedHashMap<>();
+
+        for (OrderModel item : dbOrdersList) {
+            List<OrderModel> pList = new ArrayList<>();
+            pList = orderMap.get(item.getOrderID());
+            OrderModel product = new OrderModel(item.getOrderID(), item.getProductID(), item.getProductName(), item.getProductImageID(),
+                    item.getUnitPrice(), item.getQuantity(), item.getTotalPrice(), 0);
+
+            if (pList != null) {
+                pList.add(product);
+            }
+            else{
+                pList = new ArrayList<>();
+                pList.add(product);
+            }
+            orderMap.put(item.getOrderID(), pList);
+        }
+
+
+        orderGrid.setAdapter(new GridItemOrders(getActivity(), orderMap));
 
         return view;
     }
