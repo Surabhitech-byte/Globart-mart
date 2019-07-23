@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+       >
 
     </LinearLayout>
 
@@ -26,24 +27,31 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/txtOrderCancelConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your order has been cancelled successfully."
+        android:textColor="#E53935"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+
     <ImageView
         android:id="@+id/btnGridCancel"
         android:layout_width="match_parent"
         android:layout_height="33dp"
         android:layout_marginBottom="15dp"
-        android:src="@drawable/btn_cancel_order" />
+        android:src="@drawable/btn_cancel_order"
+        android:visibility="visible"/>
 
     <ImageView
         android:id="@+id/btnGridTrack"
         android:layout_width="match_parent"
         android:layout_height="34dp"
-        android:src="@drawable/btn_track_order" />
+        android:src="@drawable/btn_track_order"
+        android:visibility="visible"/>
 
-    <TextView
-        android:id="@+id/txtOrderCancelConfirm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Your order has been cancelled successfully"
-        android:visibility="invisible" />
 
 </LinearLayout>

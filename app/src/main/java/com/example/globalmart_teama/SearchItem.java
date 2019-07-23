@@ -19,6 +19,7 @@ import com.google.zxing.integration.android.IntentResult;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -51,6 +52,7 @@ public class SearchItem extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_search_item, container, false);
+        final ImageView bgImage = view.findViewById(R.id.bgImageSearch);
 
         searchView = (SearchView) view.findViewById(R.id.searchView);
         listView = (ListView) view.findViewById(R.id.listview);
@@ -77,10 +79,11 @@ public class SearchItem extends Fragment {
                         adapter.getFilter().filter(query);
                         listView.setAdapter(adapter);
                         counter = 1;
+                        bgImage.setVisibility(View.INVISIBLE);
                     }
                 }
                 if (counter == 0) {
-                    Toast.makeText(getContext(), "No Match found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Sorry! this product is not available", Toast.LENGTH_LONG).show();
                 }
                 return false;
             }

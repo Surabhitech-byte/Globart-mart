@@ -10,13 +10,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your order has been cancelled \n \n Thank you for shopping with us."
+        android:text="Your feedback is valuable to Us. \n \n  \t \t \t  \t \t \t \t \t\t\t\t \t \tThanks"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/closePopupBtn"
+        android:id="@+id/closePopupFeedback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"

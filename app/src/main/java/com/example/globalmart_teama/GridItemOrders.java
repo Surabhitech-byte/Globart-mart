@@ -188,6 +188,7 @@ public class GridItemOrders extends BaseAdapter {
 
                         txt_confirmation_cancelOrder.setVisibility(View.VISIBLE);
                         cancelBtn.setVisibility(View.INVISIBLE);
+                        trackOrderBtn.setVisibility(View.INVISIBLE);
 
                         popupWindow.dismiss();
                     }
@@ -198,6 +199,33 @@ public class GridItemOrders extends BaseAdapter {
         trackOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                LayoutInflater layoutInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View popUpView = layoutInflater.inflate(R.layout.popup_window_track_order, null);
+
+                Button closePopupBtn = (Button) popUpView.findViewById(R.id.closePopupBtnTrackOrder);
+
+                popupWindow = new PopupWindow(popUpView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+                popupWindow.showAtLocation(linearLayout, Gravity.CENTER, 0, 0);
+
+                closePopupBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        popupWindow.dismiss();
+                    }
+                });
+
+
+
+
+
+
+
+
+
                 // code
             }
         });
