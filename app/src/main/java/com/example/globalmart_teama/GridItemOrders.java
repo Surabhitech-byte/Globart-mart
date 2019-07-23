@@ -3,6 +3,7 @@ package com.example.globalmart_teama;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -27,10 +28,12 @@ import com.google.gson.reflect.TypeToken;
 //import com.example.globalmart_teama.db.ProductsModel;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class GridItemOrders extends BaseAdapter {
-
+    private static String orderid = "";
+    private static ArrayList productList_toShow = new ArrayList();
     private List<OrderModel> mOrderModelList;
     private boolean isBeverage;
     private Activity mActivity;
@@ -85,12 +88,63 @@ public class GridItemOrders extends BaseAdapter {
         TextView txt_quantity = (TextView) convertView.findViewById(R.id.txt_quantity);
         final TextView txt_confirmation_cancelOrder = (TextView) convertView.findViewById(R.id.txtOrderCancelConfirm);
         final Button cancelBtn = convertView.findViewById(R.id.btn_cancelOrder);
-
+        TextView prd = (TextView) convertView.findViewById(R.id.product2);
+        TextView prd2 = (TextView) convertView.findViewById(R.id.product3);
+        //OrderModel positionNew = mOrderModelList.get(position) ;
 
 
         final LinearLayout linearLayout = (LinearLayout) convertView.findViewById(R.id.linear_layout);
 
         textView.setText(mOrderModelList.get(position).getOrderID()+"");
+        //System.out.println("position : "+mOrderModelList.get(position));
+         orderid = mOrderModelList.get(position).getOrderID();
+
+
+       /* if(orderid.equals(mOrderModelList.get(position).getOrderID()))
+        {
+            System.out.println("multiple orderss");
+
+        }
+*/
+        System.out.println("ORDER ID : "+orderid);
+
+        if(orderid.isEmpty())
+        {
+
+            orderid = mOrderModelList.get(position).getOrderID();
+            System.out.println("Appended order"+orderid);
+            productList_toShow.add(mOrderModelList.get(position).getProductID());
+            System.out.println("Appended product"+productList_toShow);
+        }
+        else
+        {
+            if(orderid.equals(mOrderModelList.get(position).getOrderID()))
+            {
+                productList_toShow.add(mOrderModelList.get(position).getProductID());
+                Iterator i = productList_toShow.iterator();
+                while (i.hasNext())
+                {
+                    TextView prodTextView = new TextView(mActivity);
+
+                    if(prodTextView.getParent() != null) {
+                        ((ViewGroup)prodTextView.getParent()).removeView(prodTextView); // <- fix
+                    }
+                    String s =  i.next()+"";
+
+                    prodTextView.setText(s);
+                    linearLayout.addView(textView);
+                    System.out.println("Product IN LIST  : "+i.next());
+
+                }
+
+            }
+            else{
+                System.out.println("next order");
+
+            }
+
+        }
+
         txt_Product_id.setText(mOrderModelList.get(position).getProductID()+"");
 
         txt_quantity.setText(mOrderModelList.get(position).getQuantity()+"");

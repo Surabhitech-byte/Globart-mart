@@ -44,10 +44,13 @@ public class PurchaseHistory extends Fragment {
         list1 = database.getAllOrders();
 
         System.out.println("list item"+list1);
+
         Iterator i = list1.iterator();
         while (i.hasNext())
         {
             System.out.println("ITEM IN LIST"+i.next());
+
+
 
         }
 

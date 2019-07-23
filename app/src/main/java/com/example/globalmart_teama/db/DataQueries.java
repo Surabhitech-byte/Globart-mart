@@ -13,6 +13,7 @@ public class DataQueries {
 
     private final Context mContext;
     private SQLiteDatabase database;
+
     private DBHelper dbHelper;
     public static final String SHARED_PREF_BEVERAGE = "shared pref beverage";
     public static final String IS_FIRST_TIME = "is first time";
@@ -107,14 +108,73 @@ public class DataQueries {
 
         Cursor cursor = database.query(DBHelper.OrdersEntry.TABLE_NAME,
                 orderColumns, null, null, null, null, null);
-        cursor.moveToFirst();
-        while(!cursor.isAfterLast()){
-            OrderModel orderModel = getOrderDataFromCursor(cursor);
-            OrderModelList.add(orderModel);
-            cursor.moveToNext();
+
+        //String cursor = database.query(DBHelper.OrdersEntry.TABLE_NAME,
+               // orderColumns, null, null, DBHelper.OrdersEntry.COLUMN_ORDER_ID, "count(*)>1", null);
+
+       /* int index,index2;
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                index = cursor.getColumnIndexOrThrow(DBHelper.OrdersEntry.COLUMN_ORDER_ID);
+                index2 = cursor.getColumnIndexOrThrow(DBHelper.OrdersEntry.COLUMN_PRODUCT_ID);
+
+                OrderModel orderModel = getOrderDataFromCursor(cursor);
+                OrderModelList.add(orderModel);
+
+                String orderid = cursor.getString(index);
+                System.out.println("cursor order id"+orderid);
+                System.out.println("cursor product "+cursor.getString(index2));
+
+
+            } while (cursor.moveToNext());
         }
 
-        cursor.close();
+
+*/
+        /*int index,index2;
+        System.out.println("cursor : "+cursor);
+        cursor.moveToFirst();
+        index = cursor.getColumnIndexOrThrow(DBHelper.OrdersEntry.COLUMN_ORDER_ID);
+        index2 = cursor.getColumnIndexOrThrow(DBHelper.OrdersEntry.COLUMN_PRODUCT_ID);
+
+        String orderid = cursor.getString(index);
+        System.out.println("cursor order id"+orderid);
+        System.out.println("cursor product "+cursor.getString(index2));
+
+        while(cursor.moveToNext()) {
+
+            OrderModel orderModel = getOrderDataFromCursor(cursor);
+            OrderModelList.add(orderModel);
+            cursor.moveToNext();*/
+/*
+            int index,index2;
+            index = cursor.getColumnIndexOrThrow(DBHelper.OrdersEntry.COLUMN_ORDER_ID);
+            index2 = cursor.getColumnIndexOrThrow(DBHelper.OrdersEntry.COLUMN_PRODUCT_ID);
+
+            String orderid = cursor.getString(index);
+            System.out.println("cursor order id"+orderid);
+            System.out.println("cursor product "+cursor.getString(index2));*/
+            //cursor.moveToFirst();
+           /* while (!cursor.isAfterLast()) {
+                //OrderModel orderModel = getOrderDataFromCursor(cursor);
+                OrderModelList.add(orderModel);
+                cursor.moveToNext();
+            }*/
+        //}
+        cursor.moveToFirst();
+
+
+                while (!cursor.isAfterLast()) {
+                    OrderModel orderModel = getOrderDataFromCursor(cursor);
+                    OrderModelList.add(orderModel);
+                    cursor.moveToNext();
+                }
+
+
+                cursor.close();
+        System.out.println("order list in DB queries : "+OrderModelList);
         return OrderModelList;
     }
 

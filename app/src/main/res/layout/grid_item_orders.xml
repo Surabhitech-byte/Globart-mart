@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:id="@+id/linear_layout"
     xmlns:grid="http://schemas.android.com/apk/res-auto"
-    android:padding="5dp"
+    android:padding="50dp"
     android:layout_weight="1">
 
 
@@ -86,6 +86,18 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:visibility="visible"></Button>
+
+    <TextView
+        android:id="@+id/product2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/product3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
 
     <TextView
         android:id="@+id/txtOrderCancelConfirm"
