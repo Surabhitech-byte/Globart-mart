@@ -17,8 +17,8 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.globalmart_teama.db.Database;
-import com.example.globalmart_teama.db.ProductsModel;
+import com.example.globalmart_teama.models.Database;
+import com.example.globalmart_teama.models.ProductsModel;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 import java.util.ArrayList;

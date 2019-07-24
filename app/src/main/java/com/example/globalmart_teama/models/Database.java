@@ -1,4 +1,4 @@
-package com.example.globalmart_teama.db;
+package com.example.globalmart_teama.models;
 
 import android.content.Context;
 

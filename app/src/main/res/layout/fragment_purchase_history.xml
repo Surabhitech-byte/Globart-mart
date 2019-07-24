@@ -2,10 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/purchase_history_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PurchaseHistoryFragment"
-    android:id="@+id/purchase_history_fragment">
+    tools:context=".PurchaseHistoryFragment">
 
     <TextView
         android:id="@+id/textView"
@@ -28,14 +28,14 @@
         android:id="@+id/grid"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:fastScrollEnabled="true"
-        android:numColumns="1"
-        android:gravity="center"
         android:layout_marginTop="100dp"
         android:columnWidth="100dp"
-        android:verticalSpacing="24dp"
+        android:fastScrollEnabled="true"
+        android:gravity="center"
         android:horizontalSpacing="10dp"
+        android:numColumns="1"
         android:stretchMode="columnWidth"
+        android:verticalSpacing="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline" />
 

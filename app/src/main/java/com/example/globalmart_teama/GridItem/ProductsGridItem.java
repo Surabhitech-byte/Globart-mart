@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.globalmart_teama.R;
-import com.example.globalmart_teama.db.ProductsModel;
+import com.example.globalmart_teama.models.ProductsModel;
 
 import java.util.List;
 

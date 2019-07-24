@@ -13,8 +13,8 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.example.globalmart_teama.GridItem.ProductsGridItem;
-import com.example.globalmart_teama.db.Database;
-import com.example.globalmart_teama.db.ProductsModel;
+import com.example.globalmart_teama.models.Database;
+import com.example.globalmart_teama.models.ProductsModel;
 
 import java.util.ArrayList;
 import java.util.List;

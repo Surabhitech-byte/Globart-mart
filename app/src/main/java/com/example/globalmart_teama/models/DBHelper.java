@@ -1,4 +1,4 @@
-package com.example.globalmart_teama.db;
+package com.example.globalmart_teama.models;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,7 +8,7 @@ import android.provider.BaseColumns;
 public class DBHelper extends SQLiteOpenHelper {
 
     private Context context;
-    public static final String DATABASE_NAME = "globalmart.db";
+    public static final String DATABASE_NAME = "globalmart.models";
     public static final int DATABASE_VERSION = 1;
 
     private static final String TEXT_TYPE = " TEXT";

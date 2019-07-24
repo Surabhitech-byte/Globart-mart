@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.globalmart_teama.db.ProductsModel;
+import com.example.globalmart_teama.models.ProductsModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

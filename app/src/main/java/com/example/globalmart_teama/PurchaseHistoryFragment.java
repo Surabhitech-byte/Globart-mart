@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.example.globalmart_teama.GridItem.OrdersGridItem;
-import com.example.globalmart_teama.db.Database;
-import com.example.globalmart_teama.db.OrderModel;
+import com.example.globalmart_teama.models.Database;
+import com.example.globalmart_teama.models.OrderModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;

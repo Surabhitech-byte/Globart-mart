@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.example.globalmart_teama.MyCartFragment;
 import com.example.globalmart_teama.R;
-import com.example.globalmart_teama.db.ProductsModel;
+import com.example.globalmart_teama.models.ProductsModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

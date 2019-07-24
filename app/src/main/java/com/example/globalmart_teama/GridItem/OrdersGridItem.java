@@ -2,7 +2,11 @@ package com.example.globalmart_teama.GridItem;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +19,8 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.globalmart_teama.R;
-import com.example.globalmart_teama.db.DBHelper;
-import com.example.globalmart_teama.db.OrderModel;
+import com.example.globalmart_teama.models.DBHelper;
+import com.example.globalmart_teama.models.OrderModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,6 +67,7 @@ public class OrdersGridItem extends BaseAdapter {
         if (position == 0) {
             counter++;
         }
+
 
         final ImageView cancelBtn = convertView.findViewById(R.id.btnGridCancel);
         final ImageView trackOrderBtn = convertView.findViewById(R.id.btnGridTrack);
@@ -154,8 +159,13 @@ public class OrdersGridItem extends BaseAdapter {
         linearHeaderLayout.addView(txtTotalPrice);
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
+
+                ColorDrawable cd = new ColorDrawable(Color.parseColor("#FFFFFF"));
+                linearLayout.setForeground(cd);
+                linearLayout.getForeground().setAlpha(220);
 
                 DBHelper dbQuery = new DBHelper(mActivity);
                 dbQuery.deleteOrder(orderMap.keySet().toArray()[position].toString());
@@ -172,6 +182,7 @@ public class OrdersGridItem extends BaseAdapter {
                         cancelBtn.setVisibility(View.INVISIBLE);
                         trackOrderBtn.setVisibility(View.INVISIBLE);
 
+                        linearLayout.getForeground().setAlpha(0);
                         popupWindow.dismiss();
                     }
                 });
@@ -179,9 +190,13 @@ public class OrdersGridItem extends BaseAdapter {
         });
 
         trackOrderBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
 
+                ColorDrawable cd = new ColorDrawable(Color.parseColor("#FFFFFF"));
+                linearLayout.setForeground(cd);
+                linearLayout.getForeground().setAlpha(220);
                 LayoutInflater layoutInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View popUpView = layoutInflater.inflate(R.layout.popup_window_track_order, null);
                 ImageView closePopupBtn = (ImageView) popUpView.findViewById(R.id.closePopupBtnTrackOrder);
@@ -190,7 +205,10 @@ public class OrdersGridItem extends BaseAdapter {
                 closePopupBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        linearLayout.getForeground().setAlpha(0);
                         popupWindow.dismiss();
+
                     }
                 });
             }
