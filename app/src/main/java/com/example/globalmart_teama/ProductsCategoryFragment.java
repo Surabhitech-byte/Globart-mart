@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.example.globalmart_teama.GridItem.ProductsGridItem;
 import com.example.globalmart_teama.db.Database;
 import com.example.globalmart_teama.db.ProductsModel;
 
@@ -48,7 +50,7 @@ public class ProductsCategoryFragment extends Fragment {
             productsModelList = database.getProductsByCategory("Fruits&Vegetables");
         }
 
-        productsGrid.setAdapter(new GridItem(getActivity(), productsModelList));
+        productsGrid.setAdapter(new ProductsGridItem(getActivity(), productsModelList));
 
         productsGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -73,6 +75,7 @@ public class ProductsCategoryFragment extends Fragment {
                         , fragment, "PRODUCT DESCRIPTION");
                 ft.addToBackStack(null);
                 ft.commit();
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Product Details");
             }
         });
 

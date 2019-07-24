@@ -122,7 +122,6 @@ public class DataQueries {
         return OrderModelList;
     }
 
-
     private ProductsModel getProductDataFromCursor(Cursor cursor){
         return new ProductsModel(cursor.getInt(0), cursor.getString(1),
                 cursor.getString(2), cursor.getInt(3),

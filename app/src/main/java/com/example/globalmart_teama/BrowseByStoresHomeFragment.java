@@ -5,20 +5,20 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BrowseByStoresFragment extends Fragment {
+public class BrowseByStoresHomeFragment extends Fragment {
 
 
-    public BrowseByStoresFragment() {
+    public BrowseByStoresHomeFragment() {
         // Required empty public constructor
     }
 
@@ -47,6 +47,7 @@ public class BrowseByStoresFragment extends Fragment {
                         , fragment, "Chinese");
                 ft.addToBackStack(null);
                 ft.commit();
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Chinese Stores");
             }
         });
 
@@ -60,6 +61,7 @@ public class BrowseByStoresFragment extends Fragment {
                         , fragment, "Indian");
                 ft.addToBackStack(null);
                 ft.commit();
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Indian Stores");
             }
         });
 
@@ -73,6 +75,7 @@ public class BrowseByStoresFragment extends Fragment {
                         , fragment, "Others");
                 ft.addToBackStack(null);
                 ft.commit();
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Other Stores");
             }
         });
         return view;

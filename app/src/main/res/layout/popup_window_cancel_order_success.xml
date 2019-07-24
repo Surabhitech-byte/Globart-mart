@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E53935"
+    android:background="#fff"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="10px">
@@ -11,16 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your order has been cancelled \n \n Thank you for shopping with us."
-        android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <Button
+    <ImageView
         android:id="@+id/closePopupBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@color/places_autocomplete_fullscreen_background"
-        android:text="Close" />
+        android:src="@drawable/button_close"
+        android:layout_marginTop="30dp" />
 
 </LinearLayout>

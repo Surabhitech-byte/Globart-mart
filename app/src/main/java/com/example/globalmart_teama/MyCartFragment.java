@@ -2,22 +2,24 @@ package com.example.globalmart_teama;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.globalmart_teama.GridItem.MyCartGridItem;
 import com.example.globalmart_teama.db.Database;
 import com.example.globalmart_teama.db.ProductsModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -106,17 +108,20 @@ public class MyCartFragment extends Fragment {
                         , fragment, "PAYMENT");
                 ft.addToBackStack(null);
                 ft.commit();
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Payment Confirmation");
             }
         });
 
         return view;
     }
 
+    // to clear the cart after ordering is completed
     private void clearCart() {
         SharedPreferences preferences = getActivity().getSharedPreferences("CARTLIST", Context.MODE_PRIVATE);
         preferences.edit().clear().commit();
     }
 
+    // to store the order details in the database once payment is done
     private void updateOrdersTable(String orderID) {
         final Database database = new Database(getActivity());
         shref = getActivity().getSharedPreferences("CARTLIST", Context.MODE_PRIVATE);
@@ -137,6 +142,7 @@ public class MyCartFragment extends Fragment {
         }
     }
 
+    // to generate random order id once the order is completed
     private String generateOrderID() {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder sb = new StringBuilder();
@@ -148,6 +154,5 @@ public class MyCartFragment extends Fragment {
         String orderID = sb.toString();
         return orderID;
     }
-
 
 }

@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
 
@@ -45,6 +45,7 @@ public class ShopByCategoryHomeFragment extends Fragment {
                         , fragment, "Beverages");
                 ft.addToBackStack(null);
                 ft.commit();
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Beverages");
             }
         });
 
@@ -58,6 +59,7 @@ public class ShopByCategoryHomeFragment extends Fragment {
                         , fragment, "Groceries");
                 ft.addToBackStack(null);
                 ft.commit();
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Groceries");
             }
         });
 
@@ -71,11 +73,11 @@ public class ShopByCategoryHomeFragment extends Fragment {
                         , fragment, "Fruits&Vegetables");
                 ft.addToBackStack(null);
                 ft.commit();
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Fruits & Vegetables");
             }
         });
 
         return view;
     }
-
 
 }

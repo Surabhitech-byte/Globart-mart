@@ -2,7 +2,6 @@ package com.example.globalmart_teama.db;
 
 import android.content.Context;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +9,6 @@ import java.util.Map;
 
 public class Database {
     private List<ProductsModel> productsModelList = new ArrayList<>();
-    private List<OrderModel> ordersModelList;
     private final DataQueries dataQueries;
 
     private static final Map<Integer, String> PRODUCT_NAMES = new HashMap<>();
@@ -20,7 +18,6 @@ public class Database {
     private static final Map<Integer, String> PRODUCT_CATEGORY_NAMES = new HashMap<>();
     private static final Map<Integer, String> PRODUCT_COUNTRY_NAMES = new HashMap<>();
     private static final Map<Integer, String> PRODUCT_CODES = new HashMap<>();
-
 
     static {
         PRODUCT_NAMES.put(1, "Mango Lassi");
@@ -360,7 +357,6 @@ public class Database {
 
         productsModelList = dataQueries.getAllProducts();
     }
-
 
     public List<ProductsModel> getProductsModels() {
         return productsModelList;

@@ -1,23 +1,20 @@
-package com.example.globalmart_teama;
+package com.example.globalmart_teama.GridItem;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.globalmart_teama.MyCartFragment;
+import com.example.globalmart_teama.R;
 import com.example.globalmart_teama.db.ProductsModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,7 +29,6 @@ public class MyCartGridItem extends BaseAdapter {
     SharedPreferences shref;
     Gson gson;
     SharedPreferences.Editor editor;
-    double totalPrice;
 
     public MyCartGridItem(Activity activity, List<ProductsModel> cartList) {
         this.mActivity = activity;
@@ -41,21 +37,16 @@ public class MyCartGridItem extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
-        // return (mIsStudent ? mStudentModelList.size() : mCourseModelList.size());
         return cartList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
-//        return (mIsStudent ? mStudentModelList.get(position) : mCourseModelList.get(position));
         return cartList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return 0;
     }
 
@@ -128,10 +119,12 @@ public class MyCartGridItem extends BaseAdapter {
 
                     final TextView txtTotalPrice = (TextView) view.findViewById(R.id.txtTotalPrice);
                     txtTotalPrice.setText("$" + totalPrice);
+
+                    // refresh fragment to update total price
                     FragmentManager fm = ((AppCompatActivity) parent.getContext()).getSupportFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    final MyCartFragment f = (MyCartFragment)fm.findFragmentByTag("MYCART");
-                    ft.detach(f).attach(f).commit();
+                    final MyCartFragment f = (MyCartFragment) fm.findFragmentByTag("MYCART");
+                    ft.detach(f).attach(f).addToBackStack(null).commit();
                 }
             }
         });
@@ -171,14 +164,15 @@ public class MyCartGridItem extends BaseAdapter {
                 double totalPrice2 = price2 + (0.15 * price2);
                 final TextView txtTotalPrice = (TextView) view.findViewById(R.id.txtTotalPrice);
                 txtTotalPrice.setText("$" + totalPrice2);
+
+                // refresh fragment to update total price
                 FragmentManager fm = ((AppCompatActivity) parent.getContext()).getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                final MyCartFragment f = (MyCartFragment)fm.findFragmentByTag("MYCART");
-                ft.detach(f).attach(f).commit();
+                final MyCartFragment f = (MyCartFragment) fm.findFragmentByTag("MYCART");
+                ft.detach(f).attach(f).addToBackStack(null).commit();
             }
         });
 
         return convertView;
     }
-
 }

@@ -1,4 +1,4 @@
-package com.example.globalmart_teama;
+package com.example.globalmart_teama.GridItem;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,37 +9,32 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.globalmart_teama.R;
 import com.example.globalmart_teama.db.ProductsModel;
 
 import java.util.List;
 
-public class GridItem extends BaseAdapter {
+public class ProductsGridItem extends BaseAdapter {
     private List<ProductsModel> mProductModelList;
     private Activity mActivity;
 
-    public GridItem(Activity activity, List<ProductsModel> mProductModelList) {
+    public ProductsGridItem(Activity activity, List<ProductsModel> mProductModelList) {
         this.mActivity = activity;
         this.mProductModelList = mProductModelList;
     }
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
-        // return (mIsStudent ? mStudentModelList.size() : mCourseModelList.size());
         return mProductModelList.size();
     }
 
-
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
-//        return (mIsStudent ? mStudentModelList.get(position) : mCourseModelList.get(position));
         return mProductModelList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return 0;
     }
 
@@ -47,7 +42,7 @@ public class GridItem extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.grid_item, null);
+            convertView = layoutInflater.inflate(R.layout.grid_item_products, null);
         }
 
         TextView textView = (TextView) convertView.findViewById(R.id.txtProduct);

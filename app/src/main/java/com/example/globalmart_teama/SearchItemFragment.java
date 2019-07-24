@@ -1,41 +1,36 @@
 package com.example.globalmart_teama;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.app.Activity;
-
-import com.example.globalmart_teama.db.Database;
-import com.example.globalmart_teama.db.ProductsModel;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
-
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.provider.MediaStore;
+
+import com.example.globalmart_teama.db.Database;
+import com.example.globalmart_teama.db.ProductsModel;
+import com.google.zxing.integration.android.IntentIntegrator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class SearchItem extends Fragment {
+public class SearchItemFragment extends Fragment {
 
     List<ProductsModel> df = null;
 
 
-    public SearchItem() {
+    public SearchItemFragment() {
         // Required empty public constructor
     }
 
@@ -90,12 +85,11 @@ public class SearchItem extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //    adapter.getFilter().filter(newText);
                 return false;
             }
         });
 
-
+        // In list of items - selected item click
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adaptor, View v, int listIndex, long arg3) {
@@ -126,9 +120,11 @@ public class SearchItem extends Fragment {
                         , fragment, "PRODUCT DESCRIPTION");
                 ft.addToBackStack(null);
                 ft.commit();
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Product Details");
             }
         });
 
+        // barcode scan camera icon click
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,7 +133,6 @@ public class SearchItem extends Fragment {
             }
         });
 
-        // Inflate the layout for this fragment
         return view;
     }
 

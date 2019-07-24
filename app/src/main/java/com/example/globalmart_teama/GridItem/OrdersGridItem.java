@@ -1,73 +1,51 @@
-package com.example.globalmart_teama;
+package com.example.globalmart_teama.GridItem;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.graphics.Typeface;
-import android.media.Image;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.GridView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.globalmart_teama.R;
 import com.example.globalmart_teama.db.DBHelper;
-import com.example.globalmart_teama.db.DataQueries;
 import com.example.globalmart_teama.db.OrderModel;
-import com.example.globalmart_teama.db.ProductsModel;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-//import com.example.globalmart_teama.db.ProductsModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class GridItemOrders extends BaseAdapter {
+public class OrdersGridItem extends BaseAdapter {
 
     HashMap<String, List<OrderModel>> orderMap = new HashMap<>();
-    private boolean isBeverage;
     private Activity mActivity;
     PopupWindow popupWindow;
     int counter = 0;
 
-    public GridItemOrders(Activity activity, HashMap<String, List<OrderModel>> orderMap) {
+    public OrdersGridItem(Activity activity, HashMap<String, List<OrderModel>> orderMap) {
         this.mActivity = activity;
         this.orderMap = orderMap;
     }
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
-        // return (mIsStudent ? mStudentModelList.size() : mCourseModelList.size());
         return orderMap.size();
     }
 
-
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
-//        return (mIsStudent ? mStudentModelList.get(position) : mCourseModelList.get(position));
         return orderMap.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return 0;
     }
 
@@ -90,20 +68,32 @@ public class GridItemOrders extends BaseAdapter {
         final ImageView trackOrderBtn = convertView.findViewById(R.id.btnGridTrack);
         final LinearLayout linearLayout = (LinearLayout) convertView.findViewById(R.id.linearLayout);
         final TextView txt_confirmation_cancelOrder = (TextView) convertView.findViewById(R.id.txtOrderCancelConfirm);
-        LinearLayout lProductLayout = (LinearLayout) convertView.findViewById(R.id.linearProductLayout);
-        final LinearLayout linearHeaderLayout = (LinearLayout) convertView.findViewById(R.id.linearHeaderLayout);
-        linearHeaderLayout.setOrientation(LinearLayout.VERTICAL);
 
         String orderId = orderMap.keySet().toArray()[position].toString();
         double totalPrice = 0.0;
         List<OrderModel> productsList = (ArrayList<OrderModel>) orderMap.values().toArray()[position];
-        for (OrderModel product : productsList) {
-            LinearLayout lProductrow = new LinearLayout(parent.getContext());
-            lProductrow.setOrientation(LinearLayout.HORIZONTAL);
 
+        // a vertical linear layout to hold the order id textview and the total price textview.
+        final LinearLayout linearHeaderLayout = (LinearLayout) convertView.findViewById(R.id.linearHeaderLayout);
+        linearHeaderLayout.setOrientation(LinearLayout.VERTICAL);
+
+        // a vertical linear layout to hold all the products in the current order id.
+        //  It contains a linear layout linearLayoutProductRow that is dynamically generated to hold the product details to display under the order id.
+        LinearLayout lProductLayout = (LinearLayout) convertView.findViewById(R.id.linearProductLayout);
+
+        // for each product in the current order, dynamically generate  product rows using linearLayoutProductRow to display the product image and its details.
+        for (OrderModel product : productsList) {
+
+            // a horizontal linear layout which adds one product under the current order id for each time it enters into the loop.
+            //  This linear layout contains two internal linear layouts to hold the image and other details(product name, unit price, quantity ordered). 
+            LinearLayout linearLayoutProductRow = new LinearLayout(parent.getContext());
+            linearLayoutProductRow.setOrientation(LinearLayout.HORIZONTAL);
+
+            //  an internal linear layout to hold the image of the product
             LinearLayout lImageLayout = new LinearLayout(parent.getContext());
             lImageLayout.setOrientation(LinearLayout.VERTICAL);
 
+            // an internal vertical linear layout to hold the details(product name, unit price, quantity ordered) of the product
             LinearLayout lProductDetails = new LinearLayout(parent.getContext());
             lProductDetails.setOrientation(LinearLayout.VERTICAL);
 
@@ -141,23 +131,22 @@ public class GridItemOrders extends BaseAdapter {
             txtProductUnitPrice.setTextSize(18);
             lProductDetails.addView(txtProductUnitPrice);
 
-            // add image and details to the row
-            lProductrow.addView(lImageLayout);
-            lProductrow.addView(lProductDetails);
+            // add product image and details to the row
+            linearLayoutProductRow.addView(lImageLayout);
+            linearLayoutProductRow.addView(lProductDetails);
 
-            // add row to the grid
-            lProductLayout.addView(lProductrow);
+            // add product row along with the list of other products of the current order id in the grid
+            lProductLayout.addView(linearLayoutProductRow);
         }
 
-
-        // set order id
+        // set current order id header to the grid row
         final TextView txtGridOrderID = new TextView(parent.getContext());
         txtGridOrderID.setText("Order ID: " + orderId);
         txtGridOrderID.setTextSize(24);
         txtGridOrderID.setTypeface(null, Typeface.BOLD);
         linearHeaderLayout.addView(txtGridOrderID);
 
-        // set total price
+        // set total price of the current order id
         final TextView txtTotalPrice = new TextView(parent.getContext());
         String txtTotal = totalPrice + "";
         txtTotalPrice.setText("Total Price: $" + txtTotal);
@@ -169,19 +158,12 @@ public class GridItemOrders extends BaseAdapter {
             public void onClick(View v) {
 
                 DBHelper dbQuery = new DBHelper(mActivity);
-
                 dbQuery.deleteOrder(orderMap.keySet().toArray()[position].toString());
-
                 LayoutInflater layoutInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
                 View popUpView = layoutInflater.inflate(R.layout.popup_window_cancel_order_success, null);
-
-                Button closePopupBtn = (Button) popUpView.findViewById(R.id.closePopupBtn);
-
+                ImageView closePopupBtn = (ImageView) popUpView.findViewById(R.id.closePopupBtn);
                 popupWindow = new PopupWindow(popUpView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-
                 popupWindow.showAtLocation(linearLayout, Gravity.CENTER, 0, 0);
-
                 closePopupBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -202,31 +184,15 @@ public class GridItemOrders extends BaseAdapter {
 
                 LayoutInflater layoutInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View popUpView = layoutInflater.inflate(R.layout.popup_window_track_order, null);
-
-                Button closePopupBtn = (Button) popUpView.findViewById(R.id.closePopupBtnTrackOrder);
-
+                ImageView closePopupBtn = (ImageView) popUpView.findViewById(R.id.closePopupBtnTrackOrder);
                 popupWindow = new PopupWindow(popUpView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-
                 popupWindow.showAtLocation(linearLayout, Gravity.CENTER, 0, 0);
-
                 closePopupBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-
                         popupWindow.dismiss();
                     }
                 });
-
-
-
-
-
-
-
-
-
-                // code
             }
         });
 

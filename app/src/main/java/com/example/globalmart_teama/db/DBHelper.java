@@ -1,11 +1,9 @@
 package com.example.globalmart_teama.db;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
-
-import javax.sql.CommonDataSource;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -30,7 +28,6 @@ public class DBHelper extends SQLiteOpenHelper {
         public static final String COLUMN_PRODUCT_CODE = "product_code";
     }
 
-
     public static abstract class OrdersEntry implements BaseColumns {
         public static final String TABLE_NAME = "orders";
         public static final String COLUMN_ORDER_ID = "order_id";
@@ -42,7 +39,6 @@ public class DBHelper extends SQLiteOpenHelper {
         public static final String COLUMN_UNIT_PRICE = "unit_price";
         public static final String COLUMN_TOTAL_PRICE = "total_price";
     }
-
 
     private static final String SQL_CREATE_PRODUCT_TABLE =
             "CREATE TABLE IF NOT EXISTS " + ProductsEntry.TABLE_NAME + " (" +
@@ -105,12 +101,5 @@ public class DBHelper extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(DBHelper.OrdersEntry.TABLE_NAME, DBHelper.OrdersEntry.COLUMN_ORDER_ID + "=?", new String[]{ orderId});
-
-
-
     }
-
-
-
-
 }
