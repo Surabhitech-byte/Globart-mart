@@ -101,10 +101,12 @@ public class OrdersGridItem extends BaseAdapter {
             // an internal vertical linear layout to hold the details(product name, unit price, quantity ordered) of the product
             LinearLayout lProductDetails = new LinearLayout(parent.getContext());
             lProductDetails.setOrientation(LinearLayout.VERTICAL);
-
+            int pQty = 0;
             String imgId = product.getProductImageID();
             String pName = product.getProductName();
-            int pQty = product.getQuantity();
+            if (product.getQuantity() > 0) {
+                pQty = product.getQuantity();
+            }
             double unitPrice = product.getUnitPrice();
             totalPrice = product.getTotalPrice();
 
@@ -114,32 +116,33 @@ public class OrdersGridItem extends BaseAdapter {
             imgProduct.setLayoutParams(imgProductParams);
             int id = mActivity.getResources().getIdentifier(imgId, "drawable", mActivity.getPackageName());
             imgProduct.setImageResource(id);
-            lImageLayout.addView(imgProduct);
+            if (pQty > 0) {
+                lImageLayout.addView(imgProduct);
 
-            //set product name
-            TextView txtProductName = new TextView(parent.getContext());
-            txtProductName.setText(pName);
-            txtProductName.setTextSize(18);
-            lProductDetails.addView(txtProductName);
+                //set product name
+                TextView txtProductName = new TextView(parent.getContext());
+                txtProductName.setText(pName);
+                txtProductName.setTextSize(18);
+                lProductDetails.addView(txtProductName);
 
-            //set product quantity
-            TextView txtProductQty = new TextView(parent.getContext());
-            String txtQty = pQty + "";
-            txtProductQty.setText("Quantity: " + txtQty);
-            txtProductQty.setTextSize(18);
-            lProductDetails.addView(txtProductQty);
+                //set product quantity
+                TextView txtProductQty = new TextView(parent.getContext());
+                String txtQty = pQty + "";
+                txtProductQty.setText("Quantity: " + txtQty);
+                txtProductQty.setTextSize(18);
+                lProductDetails.addView(txtProductQty);
 
-            //set product unit price
-            TextView txtProductUnitPrice = new TextView(parent.getContext());
-            String txtUnitPrice = unitPrice + "";
-            txtProductUnitPrice.setText("$" + txtUnitPrice);
-            txtProductUnitPrice.setTextSize(18);
-            lProductDetails.addView(txtProductUnitPrice);
+                //set product unit price
+                TextView txtProductUnitPrice = new TextView(parent.getContext());
+                String txtUnitPrice = unitPrice + "";
+                txtProductUnitPrice.setText("$" + txtUnitPrice);
+                txtProductUnitPrice.setTextSize(18);
+                lProductDetails.addView(txtProductUnitPrice);
 
-            // add product image and details to the row
-            linearLayoutProductRow.addView(lImageLayout);
-            linearLayoutProductRow.addView(lProductDetails);
-
+                // add product image and details to the row
+                linearLayoutProductRow.addView(lImageLayout);
+                linearLayoutProductRow.addView(lProductDetails);
+            }
             // add product row along with the list of other products of the current order id in the grid
             lProductLayout.addView(linearLayoutProductRow);
         }
