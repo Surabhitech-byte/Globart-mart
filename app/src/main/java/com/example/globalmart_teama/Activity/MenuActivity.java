@@ -1,6 +1,7 @@
 package com.example.globalmart_teama.Activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -17,11 +18,18 @@ import com.example.globalmart_teama.BrowseByStoresHomeFragment;
 import com.example.globalmart_teama.HomeFragment;
 import com.example.globalmart_teama.MyCartFragment;
 import com.example.globalmart_teama.NeedHelpFragment;
+import com.example.globalmart_teama.ProductDetailsFragment;
 import com.example.globalmart_teama.PurchaseHistoryFragment;
 import com.example.globalmart_teama.R;
 import com.example.globalmart_teama.RecommendationsFragment;
 import com.example.globalmart_teama.SearchItemFragment;
 import com.example.globalmart_teama.ShopByCategoryHomeFragment;
+import com.example.globalmart_teama.models.Database;
+import com.example.globalmart_teama.models.ProductsModel;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import java.util.List;
 
 
 public class MenuActivity extends AppCompatActivity {
@@ -194,4 +202,49 @@ public class MenuActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        //retrieve scan result
+        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (scanningResult != null) {
+            String scanContent = scanningResult.getContents();
+
+            final Database database = new Database(this);
+            List<ProductsModel> df = null;
+            df = database.getProductsModels();
+
+            ProductsModel currProduct = null;
+
+            for (ProductsModel name : df) {
+                if ((name.getProductCode().toLowerCase()).equals(scanContent)) {
+                    currProduct = name;
+
+                }
+            }
+
+            Bundle detailsBundle = new Bundle();
+            detailsBundle.putString("productName", currProduct.getProductName());
+            detailsBundle.putString("productDesc", currProduct.getProductDesc());
+            detailsBundle.putInt("productPrice", currProduct.getProductPrice());
+            detailsBundle.putString("productImageId", currProduct.getProductImageID());
+
+            ProductDetailsFragment fragment = new ProductDetailsFragment();
+            fragment.setArguments(detailsBundle);
+
+            FragmentTransaction ft = fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.main_container, fragment, "PRODUCT DESCRIPTION");
+            ft.addToBackStack(null);
+            ft.commit();
+            getSupportActionBar().setTitle("Product Details");
+
+        } else {
+            Toast toast = Toast.makeText(this.getApplicationContext(),
+                    "Product not found!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+    }
+
 }
