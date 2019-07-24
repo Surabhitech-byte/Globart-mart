@@ -26,6 +26,7 @@ import com.example.globalmart_teama.ShopByCategoryHomeFragment;
 
 public class MenuActivity extends AppCompatActivity {
 
+    //intialising variable for Drawer layout, navigation view and bar
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle togglelayout;
     private NavigationView navigationView;
@@ -37,25 +38,36 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        //fetching the value of drawer, toggle layout
         drawerLayout = (DrawerLayout) findViewById(R.id.navigation_header_id);
         togglelayout = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(togglelayout);
         togglelayout.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //initiating fragment manager
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        //replacing the fragment view with the home fragment view
         fragmentTransaction.replace(R.id.main_container, new HomeFragment());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
         getSupportActionBar().setTitle("Home");
 
+        //fetching the value of bottom navigation bar
         bottomView = findViewById(R.id.bottom_nav);
         navigationView = findViewById(R.id.navigationView_id);
+
+        //listening to the top navigation drawer input
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
 
+                //performing action based on menu item id
+
                 switch (menuItem.getItemId()) {
+
+                    //if my cart is selected in menu items redirecting it to My cart fragment
                     case R.id.my_cart_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new MyCartFragment(), "MYCART");
@@ -65,6 +77,8 @@ public class MenuActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         break;
+
+                    //if about us is selected in menu items redirecting it to About Us fragment
                     case R.id.about_us_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new AboutUsFragment());
@@ -74,6 +88,8 @@ public class MenuActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         break;
+
+                    //if Need Help is selected in menu items redirecting it to Need help fragment
                     case R.id.need_help_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new NeedHelpFragment());
@@ -83,6 +99,8 @@ public class MenuActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         break;
+
+                    //if Recommendation is selected in menu items redirecting it to Recommendation fragment
                     case R.id.feedback_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new RecommendationsFragment());
@@ -93,6 +111,7 @@ public class MenuActivity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         break;
 
+                    //if Purchase history is selected in menu items redirecting it to Purchase history fragment
                     case R.id.purchase_history_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new PurchaseHistoryFragment());
@@ -111,11 +130,14 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        //listening to the bottom navigation drawer input
         bottomView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
 
                 switch (menuItem.getItemId()) {
+
+                    //if Home is selected in menu items redirecting it to Home fragment
                     case R.id.home:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new HomeFragment());
@@ -125,6 +147,8 @@ public class MenuActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         break;
+
+                    //if Search is selected in menu items redirecting it to Search fragment
                     case R.id.search:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new SearchItemFragment());
@@ -134,6 +158,8 @@ public class MenuActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         break;
+
+                    //if STORES is selected in menu items redirecting it to Stores fragment
                     case R.id.store_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new BrowseByStoresHomeFragment());
@@ -143,6 +169,8 @@ public class MenuActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         break;
+
+                    //if Categories is selected in menu items redirecting it to Categories fragment
                     case R.id.categories:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new ShopByCategoryHomeFragment());

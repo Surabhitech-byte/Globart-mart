@@ -38,6 +38,7 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    //intialising static variables, variables for map, permissions and ImageView
     private GoogleMap mMap;
     private EditText mSearchLocationTxt;
     private static final String TAG = "MapActivity";
@@ -54,9 +55,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        //taking input for alternate location provided by user
         mSearchLocationTxt = findViewById(R.id.location_search_txt);
+        //taking input for continue button to move to next page
         continueButton = findViewById(R.id.Continue_btn);
 
+        //on continue button click listener
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,15 +69,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        //initiating function to get user's permission to access the location
         getLocationPermission();
         initMap_OnSearch();
     }
 
+    /**
+     * function to initialise the map fragment
+     **/
     private void initMap() {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(MapsActivity.this);
     }
 
+    /**
+     * function to initialise map based on the text input in search location bar
+     **/
     private void initMap_OnSearch() {
         mSearchLocationTxt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -83,7 +94,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         || event.getAction() == KeyEvent.ACTION_DOWN
                         || event.getAction() == KeyEvent.KEYCODE_ENTER) {
 
-                    //execute our method for searching
+                    //calling method to search new location entered by user
                     geoLocate();
                 }
                 return false;
@@ -91,10 +102,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
+    /**
+     * function to fetch the location based on the text provided by the user
+     **/
     private void geoLocate() {
         String searchString = mSearchLocationTxt.getText().toString();
 
         Geocoder geocoder = new Geocoder(MapsActivity.this);
+
+        //creating a list to store the address
         List<Address> list = new ArrayList<>();
         try {
             list = geocoder.getFromLocationName(searchString, 1);
@@ -110,6 +126,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    /**
+     * function to get user permission to access the location
+     **/
     private void getLocationPermission() {
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -132,12 +151,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-
+    /**
+     * Overriding this standard function to implement additional functionalities
+     **/
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        /**checking if permission granted by user**/
         if (mLocationPermissionsGranted) {
+
+            //calling function to get device current location
             getDeviceCurrentLoc();
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -150,6 +174,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    /**
+     * Based on the result of the location access request, this function is called
+     **/
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         mLocationPermissionsGranted = false;
@@ -164,24 +191,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     }
                     mLocationPermissionsGranted = true;
-                    //initialize our map
+                    //initializing the map
                     initMap();
                 }
             }
         }
     }
 
-
+    //function to get device current location
     private void getDeviceCurrentLoc() {
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         try {
+            //checking if permission has been granted
             if (mLocationPermissionsGranted) {
 
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
+                //getting user current location and moving the camera and updating the marker with current location
                 final Task currLoc = mFusedLocationProviderClient.getLastLocation();
                 currLoc.addOnCompleteListener(new OnCompleteListener() {
                     @Override
