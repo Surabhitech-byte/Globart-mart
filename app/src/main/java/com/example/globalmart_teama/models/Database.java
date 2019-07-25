@@ -297,7 +297,7 @@ public class Database {
 
     static {
 
-        PRODUCT_CODES.put(1, "9780123456786");
+        PRODUCT_CODES.put(1, "97801234567868687");
         PRODUCT_CODES.put(2, "123");
         PRODUCT_CODES.put(3, "152");
         PRODUCT_CODES.put(4, "153");
@@ -307,7 +307,7 @@ public class Database {
         PRODUCT_CODES.put(8, "1243");
         PRODUCT_CODES.put(9, "434");
         PRODUCT_CODES.put(10, "4325");
-        PRODUCT_CODES.put(11, "97801243243456786");
+        PRODUCT_CODES.put(11, "9780123456786");
         PRODUCT_CODES.put(12, "12345");
         PRODUCT_CODES.put(13, "1522352");
         PRODUCT_CODES.put(14, "153565");

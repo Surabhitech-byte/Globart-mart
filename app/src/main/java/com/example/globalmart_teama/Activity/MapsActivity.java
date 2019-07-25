@@ -49,6 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private Boolean mLocationPermissionsGranted = false;
     private ImageView continueButton;
+    private static String addressLine = " ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,16 +216,41 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 currLoc.addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
+
+                        String add= "";
+
                         if (task.isSuccessful()) {
                             Location currLocationIs = (Location) task.getResult();
                             LatLng latLng = new LatLng(currLocationIs.getLatitude(), currLocationIs.getLongitude());
+
+                            Geocoder geocoder = new Geocoder(MapsActivity.this);
+                            List<Address> list = new ArrayList<>();
+                            try {
+
+                                list = geocoder.getFromLocation(currLocationIs.getLatitude(), currLocationIs.getLongitude(),1);
+                                Address obj = list.get(0);
+                                add = obj.getAddressLine(0);
+                                addressLine = add;
+
+                                //extras.putString("address", addressLine);
+
+
+                                System.out.println("Address current location : "+add);
+
+                            } catch (IOException e) {
+                                Log.e(TAG, "geoLocate: IOException: " + e.getMessage());
+                            }
+
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM));
-                            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
+                            mMap.addMarker(new MarkerOptions().position(latLng).title(add));
                         } else {
                             Toast.makeText(MapsActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });
+
+
             }
         } catch (Exception e) {
             Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage());
